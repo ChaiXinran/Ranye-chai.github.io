@@ -1,0 +1,317 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>COpre_MIP_1 | PlutoC</title><meta name="author" content="Pluto"><meta name="copyright" content="Pluto"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这里是综合了讨论区有关MIPS内容的两篇精华帖写出的一篇内容（）好吧其实是想在法科社课打卡之前消磨时间写的，写完就准备开溜">
+<meta property="og:type" content="article">
+<meta property="og:title" content="COpre_MIP_1">
+<meta property="og:url" content="http://ranyechai.site/2025/09/16/COpre-MIP-1/index.html">
+<meta property="og:site_name" content="PlutoC">
+<meta property="og:description" content="这里是综合了讨论区有关MIPS内容的两篇精华帖写出的一篇内容（）好吧其实是想在法科社课打卡之前消磨时间写的，写完就准备开溜">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ranyechai.site/images/COpreCover.jpg">
+<meta property="article:published_time" content="2025-09-16T10:04:52.000Z">
+<meta property="article:modified_time" content="2025-09-16T13:31:07.937Z">
+<meta property="article:author" content="Pluto">
+<meta property="article:tag" content="CO_pre">
+<meta property="article:tag" content="MIPS">
+<meta property="article:tag" content="coding">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ranyechai.site/images/COpreCover.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "COpre_MIP_1",
+  "url": "http://ranyechai.site/2025/09/16/COpre-MIP-1/",
+  "image": "http://ranyechai.site/images/COpreCover.jpg",
+  "datePublished": "2025-09-16T10:04:52.000Z",
+  "dateModified": "2025-09-16T13:31:07.937Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Pluto",
+      "url": "http://ranyechai.site"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/plutoc-favicon.ico"><link rel="canonical" href="http://ranyechai.site/2025/09/16/COpre-MIP-1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'COpre_MIP_1',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/COpreCover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">PlutoC</span></a><a class="nav-page-title" href="/"><span class="site-name">COpre_MIP_1</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">COpre_MIP_1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-09-16T10:04:52.000Z" title="发表于 2025-09-16 18:04:52">2025-09-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T13:31:07.937Z" title="更新于 2025-09-16 21:31:07">2025-09-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="MIP指南（一）"><a href="#MIP指南（一）" class="headerlink" title="MIP指南（一）"></a>MIP指南（一）</h1><h3 id="eqv-为寄存器命名"><a href="#eqv-为寄存器命名" class="headerlink" title=".eqv 为寄存器命名"></a>.eqv 为寄存器命名</h3><p>主要是为了提高代码的可读性<br>习惯了C语言的函数命名，现在看一堆寄存器的名字就很不习惯<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.eqv</span> n,<span class="variable">$s0</span></span><br><span class="line"><span class="selector-tag">li</span> n,<span class="number">10</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="寄存器功能约定"><a href="#寄存器功能约定" class="headerlink" title="寄存器功能约定"></a>寄存器功能约定</h2><blockquote>
+<p>这个其实我在上一篇也提到了这一点，但我当时的想法只是针对每一个题，规定不同的寄存器的用途，是一个比较初步的想法。</p>
+<p>而学长的做法就相对比较成熟了，算是直接将这个想法抽象出来，直接规定哪几个寄存器是做什么的，这样以后无脑用就很方便。</p>
+</blockquote>
+<ul>
+<li>for循环变量:$t0,$t1<ul>
+<li><blockquote>
+<p>这里我们特别强调一下，函数调用时要注意这两个寄存器的入栈和出栈，防止发生冲突</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>验证真值:$t2</li>
+<li>恒1变量:$t3</li>
+<li>数组地址位移:$t4</li>
+<li>数组的数:$t5</li>
+</ul>
+<h2 id="宏定义"><a href="#宏定义" class="headerlink" title="宏定义"></a>宏定义</h2><h3 id="宏定义的简单使用"><a href="#宏定义的简单使用" class="headerlink" title="宏定义的简单使用"></a>宏定义的简单使用</h3><blockquote>
+<p>这里其实我在第一篇有关COpre的文章里就提到过，但是那个没有这个全面，我也正好试一下学习的新板块功能</p>
+</blockquote>
+<p>宏定义大致分为以下5类：</p>
+<ul>
+<li>int数字的输入(<mark class="hl-label red">5</mark>)和输出(<mark class="hl-label red">1</mark>)</li>
+<li>char字符的输入(<mark class="hl-label red">12</mark>)和str字符串的输出(<mark class="hl-label blue">4</mark>)</li>
+<li>数组位移偏移量的获取</li>
+<li>函数的寄存器压栈[push(<mark class="hl-label blue">-4</mark>),pop(<mark class="hl-label blue">4</mark>)]</li>
+<li>结束程序(<mark class="hl-label red">10</mark>)</li>
+</ul>
+<div class="tabs"><div class="nav-tabs"><button type="button" class="tab">macro 1</button><button type="button" class="tab">macro 2</button><button type="button" class="tab">macro 3</button><button type="button" class="tab">macro 4</button><button type="button" class="tab active">macro 5</button></div><div class="tab-contents"><div class="tab-item-content"><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.macro getInt(%des)</span><br><span class="line">    li      $v0,<span class="number">5</span></span><br><span class="line">    syscall</span><br><span class="line">    <span class="keyword">move</span>    %des,$v0</span><br><span class="line">.end_marco</span><br><span class="line"></span><br><span class="line">.macro printInt(%src)</span><br><span class="line">    <span class="keyword">move</span>    $a0,%src</span><br><span class="line">    li      $v0 ,<span class="number">1</span></span><br><span class="line">    syscall</span><br><span class="line">.end_marco</span><br></pre></td></tr></table></figure></div><div class="tab-item-content"><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.macro getChar(<span class="variable">%des</span>)</span><br><span class="line">    li      <span class="variable">$v0</span>,<span class="number">12</span></span><br><span class="line">    <span class="keyword">syscall</span></span><br><span class="line">    move    <span class="variable">%des</span>,<span class="variable">$v0</span></span><br><span class="line">.end_marco</span><br><span class="line"></span><br><span class="line">.macro printStr(<span class="variable">%src</span>)</span><br><span class="line">    la 		<span class="variable">$a0</span>, <span class="variable">%src</span></span><br><span class="line">	li		<span class="variable">$v0</span>, <span class="number">4</span></span><br><span class="line">	<span class="keyword">syscall</span> </span><br><span class="line">.end_marco</span><br></pre></td></tr></table></figure></div><div class="tab-item-content"><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">.macro</span> push(%src)</span><br><span class="line">    <span class="keyword">addi </span>    $<span class="built_in">sp</span>,$<span class="built_in">sp</span>,-<span class="number">4</span></span><br><span class="line">    <span class="keyword">sw </span>     %src,<span class="number">0</span>($<span class="built_in">sp</span>)</span><br><span class="line">.end_marco</span><br><span class="line"></span><br><span class="line"><span class="meta">.macro</span> pop(%des)</span><br><span class="line">    <span class="keyword">lw </span>     %des,<span class="number">0</span>($<span class="built_in">sp</span>)</span><br><span class="line">    <span class="keyword">addi </span>   $<span class="built_in">sp</span>,$<span class="built_in">sp</span>,<span class="number">4</span></span><br><span class="line">.end_marco</span><br></pre></td></tr></table></figure></div><div class="tab-item-content"><figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.macro One_Array(<span class="title function_">%ans</span>,<span class="title function_">%i</span>)</span><br><span class="line">    sll <span class="title function_">%ans</span>,<span class="title function_">%i</span>,2</span><br><span class="line">.end_marco</span><br><span class="line"></span><br><span class="line">//<span class="keyword">Array</span>[M][N] 元素<span class="keyword">Array</span>[i][j]</span><br><span class="line">.macro Two_Array(<span class="title function_">%ans</span>,<span class="title function_">%i</span>,<span class="title function_">%j</span>,<span class="title function_">%m</span>)</span><br><span class="line">    mult    <span class="title function_">%i</span>,<span class="title function_">%m</span></span><br><span class="line">    mflo    <span class="title function_">%ans</span></span><br><span class="line">    <span class="keyword">add</span>     <span class="title function_">%ans</span>,<span class="title function_">%ans</span>,<span class="title function_">%j</span></span><br><span class="line">    sll     <span class="title function_">%ans</span>,<span class="title function_">%ans</span>,2</span><br><span class="line">.end_marco</span><br></pre></td></tr></table></figure></div><div class="tab-item-content active"><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.<span class="keyword">macro</span> <span class="keyword">end</span></span><br><span class="line">    li <span class="variable">$v0</span>,<span class="number">10</span></span><br><span class="line">    syscall</span><br><span class="line">.end_marco</span><br></pre></td></tr></table></figure></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div>
+<p>到这里我们对宏的使用就结束了吗？<br>当然没有！！！</p>
+<p>宏具备以下特性，使其非常适合封装函数</p>
+<ul>
+<li>独立的段：可以有自己的<mark class="hl-label default">.data</mark>和<mark class="hl-label default">.text</mark>段</li>
+<li>重载支持：同名宏可以根据参数个数不同实现重载</li>
+</ul>
+<p>因此！我们考虑将麻烦的输出、for循环等等封装成宏！</p>
+<h3 id="宏定义的进阶使用"><a href="#宏定义的进阶使用" class="headerlink" title="宏定义的进阶使用"></a>宏定义的进阶使用</h3><h4 id="print函数"><a href="#print函数" class="headerlink" title="print函数"></a>print函数</h4><div class="tabs"><div class="nav-tabs"><button type="button" class="tab active">print 1</button><button type="button" class="tab">print 2</button></div><div class="tab-contents"><div class="tab-item-content active"><blockquote>
+<p>封装代码</p>
+</blockquote>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">.macro <span class="keyword">print</span>(%str)</span><br><span class="line">.data</span><br><span class="line">_str:.asiiz %str</span><br><span class="line">.<span class="keyword">text</span></span><br><span class="line">la $a0, _str</span><br><span class="line">li $v0,<span class="number">4</span></span><br><span class="line">syscall</span><br><span class="line">.end_macro</span><br><span class="line"></span><br><span class="line">.macro <span class="keyword">print</span>(%int,%sep)</span><br><span class="line">.data</span><br><span class="line">_str:.asiiz %sep</span><br><span class="line">.<span class="keyword">text</span></span><br><span class="line">li $v0,<span class="number">1</span></span><br><span class="line"><span class="keyword">move</span> $a0,%int</span><br><span class="line">syscall</span><br><span class="line">la $a0, _str</span><br><span class="line">li $v0,<span class="number">4</span></span><br><span class="line">syscall</span><br><span class="line">.end_macro</span><br></pre></td></tr></table></figure></div><div class="tab-item-content"><blockquote>
+<p>程序调用</p>
+</blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">print</span><span class="params">(<span class="string">&quot;hello&quot;</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(<span class="variable">$t0</span>,<span class="string">&quot;is $t0&quot;</span>)</span></span></span><br></pre></td></tr></table></figure></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div>
+<h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><p>通过宏封装,不仅可以实现<strong>嵌套循环</strong>，而且代码的可读性也会得到显著提高.<br>原理是将<strong>标签</strong>作为参数传入宏，从而实现循环的嵌套.</p>
+<div class="tabs"><div class="nav-tabs"><button type="button" class="tab active">for 1</button><button type="button" class="tab">for 2</button></div><div class="tab-contents"><div class="tab-item-content active"><blockquote>
+<p>封装代码</p>
+</blockquote>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.macro for(<span class="title function_">%i</span>,<span class="title function_">%n</span>,<span class="title function_">%startLabel</span>,<span class="built_in">%end</span><span class="keyword">Label</span>)</span><br><span class="line">li <span class="title function_">%i</span>,0</span><br><span class="line"><span class="title function_">%startLabel</span>:</span><br><span class="line">bge <span class="title function_">%i</span>,<span class="title function_">%n</span>,<span class="built_in">%end</span><span class="keyword">Label</span></span><br><span class="line">.end_macro</span><br><span class="line"></span><br><span class="line">.marco for_end(<span class="title function_">%i</span>,<span class="title function_">%startLabel</span>,<span class="built_in">%end</span><span class="keyword">Label</span>)</span><br><span class="line"><span class="keyword">add</span> <span class="title function_">%reg</span>,<span class="title function_">%reg</span>,1</span><br><span class="line">j <span class="title function_">%startLabel</span></span><br><span class="line"><span class="built_in">%end</span><span class="keyword">Label</span>:</span><br><span class="line">.end_macro</span><br></pre></td></tr></table></figure></div><div class="tab-item-content"><blockquote>
+<p>程序调用</p>
+</blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">for</span><span class="params">(<span class="variable">$t0</span>,n,begin1,end1)</span></span></span><br><span class="line"><span class="function"><span class="title">for</span><span class="params">(<span class="variable">$t1</span>,m,begin2,end2)</span></span></span><br><span class="line">#一些操作内容</span><br><span class="line"><span class="function"><span class="title">for_end</span><span class="params">(<span class="variable">$t1</span>,begin2,end2)</span></span></span><br><span class="line"><span class="function"><span class="title">for_end</span><span class="params">(<span class="variable">$t0</span>,begin1,end1)</span></span></span><br></pre></td></tr></table></figure></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div>
+<h4 id="递归函数调用过程"><a href="#递归函数调用过程" class="headerlink" title="递归函数调用过程"></a>递归函数调用过程</h4><p>这里我们直接以<mark class="hl-label blue">Hamilton回路</mark>为例</p>
+<div class="tabs"><div class="nav-tabs"><button type="button" class="tab active">func 1</button><button type="button" class="tab">func 2</button></div><div class="tab-contents"><div class="tab-item-content active"><blockquote>
+<p>封装代码</p>
+</blockquote>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.marco dfs(<span class="variable">%int</span>)</span><br><span class="line">move <span class="variable">$a0</span>,<span class="variable">%int</span><span class="comment">#传参</span></span><br><span class="line"><span class="keyword">push</span>(<span class="variable">$t0</span>)</span><br><span class="line"><span class="keyword">push</span>(<span class="variable">$t1</span>)</span><br><span class="line"><span class="keyword">push</span>(<span class="variable">$ra</span>)</span><br><span class="line">jal dfs_function</span><br><span class="line"><span class="keyword">pop</span>(<span class="variable">$ra</span>)</span><br><span class="line"><span class="keyword">pop</span>(<span class="variable">$t1</span>)</span><br><span class="line"><span class="keyword">pop</span>(<span class="variable">$t0</span>)</span><br><span class="line">.end_marco</span><br></pre></td></tr></table></figure></div><div class="tab-item-content"><blockquote>
+<p>程序调用</p>
+</blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">dfs</span><span class="params">($<span class="number">0</span>)</span></span></span><br></pre></td></tr></table></figure></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div>
+<p><a target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/#/discussion_area/1741/2073/posts">参考1</a><br><a target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/#/discussion_area/1734/1595/posts">参考2</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://ranyechai.site">Pluto</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://ranyechai.site/2025/09/16/COpre-MIP-1/">http://ranyechai.site/2025/09/16/COpre-MIP-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://ranyechai.site" target="_blank">PlutoC</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CO-pre/">CO_pre</a><a class="post-meta__tags" href="/tags/MIPS/">MIPS</a><a class="post-meta__tags" href="/tags/coding/">coding</a></div><div class="post-share"><div class="social-share" data-image="/images/COpreCover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/09/14/copre/" title="copre"><img class="cover" src="/images/COpreCover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">copre</div></div><div class="info-2"><div class="info-item-1">主播de了很长时间bug,面如死灰，这里整理了一些主播错误的地方和小想法</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/09/14/copre/" title="copre"><img class="cover" src="/images/COpreCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-14</div><div class="info-item-2">copre</div></div><div class="info-2"><div class="info-item-1">主播de了很长时间bug,面如死灰，这里整理了一些主播错误的地方和小想法</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Pluto</div><div class="author-info-description">欢迎来到我的博客~这里有我的一些学习资料和一些好玩的东西</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ranye-chai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Ranye-chai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MIP%E6%8C%87%E5%8D%97%EF%BC%88%E4%B8%80%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">MIP指南（一）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#eqv-%E4%B8%BA%E5%AF%84%E5%AD%98%E5%99%A8%E5%91%BD%E5%90%8D"><span class="toc-number">1.0.1.</span> <span class="toc-text">.eqv 为寄存器命名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%8A%9F%E8%83%BD%E7%BA%A6%E5%AE%9A"><span class="toc-number">1.1.</span> <span class="toc-text">寄存器功能约定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.</span> <span class="toc-text">宏定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8F%E5%AE%9A%E4%B9%89%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">宏定义的简单使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8F%E5%AE%9A%E4%B9%89%E7%9A%84%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">宏定义的进阶使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#print%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">print函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">递归函数调用过程</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/09/16/COpre-MIP-1/" title="COpre_MIP_1"><img src="/images/COpreCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="COpre_MIP_1"/></a><div class="content"><a class="title" href="/2025/09/16/COpre-MIP-1/" title="COpre_MIP_1">COpre_MIP_1</a><time datetime="2025-09-16T10:04:52.000Z" title="发表于 2025-09-16 18:04:52">2025-09-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/14/copre/" title="copre"><img src="/images/COpreCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="copre"/></a><div class="content"><a class="title" href="/2025/09/14/copre/" title="copre">copre</a><time datetime="2025-09-14T14:25:31.000Z" title="发表于 2025-09-14 22:25:31">2025-09-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/19/PCA/" title="PCA"><img src="/images/mathcover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PCA"/></a><div class="content"><a class="title" href="/2025/07/19/PCA/" title="PCA">PCA</a><time datetime="2025-07-19T05:34:30.000Z" title="发表于 2025-07-19 13:34:30">2025-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/19/GRA/" title="GRA"><img src="/images/mathcover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GRA"/></a><div class="content"><a class="title" href="/2025/07/19/GRA/" title="GRA">GRA</a><time datetime="2025-07-19T04:41:58.000Z" title="发表于 2025-07-19 12:41:58">2025-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/19/FCE/" title="FCE"><img src="/images/mathcover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FCE"/></a><div class="content"><a class="title" href="/2025/07/19/FCE/" title="FCE">FCE</a><time datetime="2025-07-19T02:53:05.000Z" title="发表于 2025-07-19 10:53:05">2025-07-19</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Pluto</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
