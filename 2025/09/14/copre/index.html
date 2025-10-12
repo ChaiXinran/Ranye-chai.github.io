@@ -1,0 +1,379 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>copre | PlutoC</title><meta name="author" content="Caxirye"><meta name="copyright" content="Caxirye"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="主播de了很长时间bug,面如死灰，这里整理了一些主播错误的地方和小想法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="copre">
+<meta property="og:url" content="http://ranyechai.site/2025/09/14/copre/index.html">
+<meta property="og:site_name" content="PlutoC">
+<meta property="og:description" content="主播de了很长时间bug,面如死灰，这里整理了一些主播错误的地方和小想法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ranyechai.site/images/COpreCover.jpg">
+<meta property="article:published_time" content="2025-09-14T14:25:31.000Z">
+<meta property="article:modified_time" content="2025-09-18T14:05:15.377Z">
+<meta property="article:author" content="Caxirye">
+<meta property="article:tag" content="MIPS">
+<meta property="article:tag" content="CO_Pre">
+<meta property="article:tag" content="verilog">
+<meta property="article:tag" content="debug_thoughts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ranyechai.site/images/COpreCover.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "copre",
+  "url": "http://ranyechai.site/2025/09/14/copre/",
+  "image": "http://ranyechai.site/images/COpreCover.jpg",
+  "datePublished": "2025-09-14T14:25:31.000Z",
+  "dateModified": "2025-09-18T14:05:15.377Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Caxirye",
+      "url": "http://ranyechai.site"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/plutoc-favicon.ico"><link rel="canonical" href="http://ranyechai.site/2025/09/14/copre/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'copre',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/back.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/COpreCover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">PlutoC</span></a><a class="nav-page-title" href="/"><span class="site-name">copre</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">copre</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-09-14T14:25:31.000Z" title="发表于 2025-09-14 22:25:31">2025-09-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-18T14:05:15.377Z" title="更新于 2025-09-18 22:05:15">2025-09-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/COpre/">COpre</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/COpre/notes/">notes</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="verilog"><a href="#verilog" class="headerlink" title="verilog"></a>verilog</h1><blockquote>
+<p>主播在电梯、CPU检查challenge、Timer都卡过，悲惨（）</p>
+</blockquote>
+<h3 id="电梯"><a href="#电梯" class="headerlink" title="电梯"></a>电梯</h3><ol>
+<li><p>注意到它的输出要求是立即变化<br>电梯的方向和楼层是下一周期变化</p>
+</li>
+<li><p>那么我们就要用寄存器存out<br>并在每一时钟周期开始循环判断前就对out的值进行一个判断</p>
+</li>
+<li><p>同时考虑到为时序逻辑模块<br>我们需要把out单独拿出来，用always结构进行一个判断</p>
+</li>
+<li><p>同时注意到，每一周期输入若reset=1<br>则置initial，直接进入下一周期<br>不要在这个判断后直接if开始判断from<br>而是要在reset判断的大的else框架里进行一个操作</p>
+</li>
+<li><p>在电梯各状态的维护上，<br>注意理清逻辑关系，想清楚先后判断顺序以及分布<br>再进行写，让代码尽可能简洁清晰</p>
+</li>
+</ol>
+<blockquote>
+<p>此处附上代码~</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> elevator(</span><br><span class="line">	<span class="keyword">input</span> [<span class="number">2</span>:<span class="number">0</span>] from,</span><br><span class="line">	<span class="keyword">input</span> clk,</span><br><span class="line">	<span class="keyword">input</span> reset,</span><br><span class="line">	<span class="keyword">output</span> <span class="keyword">reg</span> out</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] status;<span class="comment">//维护电梯的楼层</span></span><br><span class="line">	<span class="keyword">reg</span> dir;<span class="comment">//维护电梯的运行方向 1向上0向下</span></span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] ask;<span class="comment">//维护乘客请求</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		status &lt;= <span class="number">3&#x27;b001</span>;</span><br><span class="line">		dir &lt;= <span class="number">1&#x27;b1</span>;</span><br><span class="line">		ask &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">always</span>@(status,ask,from)<span class="keyword">begin</span></span><br><span class="line">		<span class="keyword">if</span>(status==ask || status==from)<span class="keyword">begin</span></span><br><span class="line">				out &lt;= <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">				out &lt;= <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">always</span>@(<span class="keyword">posedge</span> clk)<span class="keyword">begin</span></span><br><span class="line">	</span><br><span class="line">		<span class="keyword">if</span>(reset==<span class="number">1</span>)<span class="keyword">begin</span></span><br><span class="line">			status &lt;= <span class="number">3&#x27;b001</span>;</span><br><span class="line">			ask &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">			dir &lt;= <span class="number">1&#x27;b1</span>;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">		<span class="keyword">if</span>(from == <span class="number">3&#x27;b000</span>)<span class="keyword">begin</span><span class="comment">//没有新请求</span></span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span>(status==ask)<span class="keyword">begin</span></span><br><span class="line">				ask&lt;=<span class="number">3&#x27;b000</span>;<span class="comment">//取消请求</span></span><br><span class="line">			<span class="keyword">end</span></span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">	</span><br><span class="line">				<span class="keyword">if</span>(dir==<span class="number">1&#x27;b1</span>&amp;&amp;status==<span class="number">3&#x27;b111</span>)<span class="keyword">begin</span></span><br><span class="line">					dir &lt;= <span class="number">1&#x27;b0</span>;</span><br><span class="line">					status &lt;= <span class="number">3&#x27;b110</span>;</span><br><span class="line">				<span class="keyword">end</span></span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(dir==<span class="number">1&#x27;b0</span>&amp;&amp;status==<span class="number">3&#x27;b001</span>)<span class="keyword">begin</span></span><br><span class="line">					dir &lt;= <span class="number">1&#x27;b1</span>;</span><br><span class="line">					status &lt;= <span class="number">3&#x27;b010</span>;</span><br><span class="line">				<span class="keyword">end</span></span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(dir==<span class="number">1&#x27;b0</span>)<span class="keyword">begin</span></span><br><span class="line">					status &lt;= status - <span class="number">3&#x27;b001</span>;</span><br><span class="line">				<span class="keyword">end</span></span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(dir==<span class="number">1&#x27;b1</span>)<span class="keyword">begin</span></span><br><span class="line">					status &lt;= status + <span class="number">3&#x27;b001</span>;</span><br><span class="line">				<span class="keyword">end</span></span><br><span class="line">	</span><br><span class="line">			<span class="keyword">end</span></span><br><span class="line">			</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">begin</span> <span class="comment">//有新请求</span></span><br><span class="line">		</span><br><span class="line">			<span class="keyword">if</span>(status&lt;from) <span class="keyword">begin</span></span><br><span class="line">				dir &lt;= <span class="number">1&#x27;b1</span>;</span><br><span class="line">				status &lt;= status + <span class="number">3&#x27;b001</span>;</span><br><span class="line">				ask &lt;= from;</span><br><span class="line">			<span class="keyword">end</span></span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(status&gt;from)<span class="keyword">begin</span></span><br><span class="line">				dir &lt;= <span class="number">1&#x27;b0</span>;</span><br><span class="line">				status &lt;= status -<span class="number">3&#x27;b001</span>;</span><br><span class="line">				ask &lt;= from;</span><br><span class="line">			<span class="keyword">end</span></span><br><span class="line">			</span><br><span class="line">			<span class="keyword">end</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/tutorial/verilog/verilog-4/verilog-4-7/">电梯</a></li>
+</ul>
+<h3 id="CPU检查challenge"><a href="#CPU检查challenge" class="headerlink" title="CPU检查challenge"></a>CPU检查challenge</h3><blockquote>
+<p>这里其实就是一些小问题</p>
+</blockquote>
+<ol>
+<li>8’h2的8是指2进制的位数</li>
+<li>比较大小时注意变量位数的匹配</li>
+<li>写16进制数时小心点hhhh</li>
+<li>还有就是<strong>位移表示</strong>循环读入字符组成10进制:<br>num &lt;=num&lt;&lt;3+num&lt;&lt;2 +char<br> (10 = 8 + 2)</li>
+<li>判断一个数是否是4的倍数:num[1:0]==2’b00</li>
+<li>a必须是b的整数倍: a &amp; (b-1) != 0</li>
+</ol>
+<blockquote>
+<p>我愿跨越山海赴你的烽月，等白首亦如初见~<br>对不起（）乱入的歌词</p>
+</blockquote>
+<p>主播一般采取先写题目说明，再写伪代码，最后实际写代码的形式<br>感觉比较有效</p>
+<div class="tabs"><div class="nav-tabs"><button type="button" class="tab active">SomeNotes 1</button><button type="button" class="tab">SomeNotes 2</button></div><div class="tab-contents"><div class="tab-item-content active"><blockquote>
+<p>给出思路整理<br>verilog 字符自动机</p>
+</blockquote>
+<p>名称： id_fsm</p>
+<p>模块<br>char 接受串行输入的字符 8<br>clk 接受时钟信号 1<br>out 状态机输出 1</p>
+<p>每个clk上升沿到来瞬间：<br>从char读入一个字符c（c用ascii码表示）</p>
+<p>S:已经读入的字符串</p>
+<p>设读入前为S 读入c后的新Sc<br>Sc符合定义 out置为1 否则out置为0</p>
+<p>ID：字母+数字</p>
+<p>对于out:<br>如果上一周期out=1<br>读入了一个数字则out=1<br>读入了一个非数字out=0</p>
+<p>如果上一周期out=0<br>上一字符为字母，读入数字，out=1<br>否则out=0</p>
+<p>需要一个额外的变量储存上一字符</p></div><div class="tab-item-content"><blockquote>
+<p>给出伪代码</p>
+</blockquote>
+<p>verilog_cpu</p>
+<p>clk 1<br>reset  复位 1<br>char 输入的字符流 8<br>format_type 2<br>0格式错误<br>1寄存器<br>2数据存储器</p>
+<p>示例<br>^ 1 0 2 4 @ 0 0 0 0 3 0 f c : $ 2 &lt; = 8 9 a b c d e f # ^ 6 4<br>0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0</p>
+<p>输出单独拎出来挡在最前面<br>flag=7<br>format_type = state<br>flag置0<br>输出1<br>否则输出0</p>
+<p>!<br>reset判断<br>type=1<br>flag=0<br>state=0<br>cnt=0<br>后面都放在大的else里</p>
+<p>if 读入^开始识别<br>flag置1</p>
+<p>else if flag=1&amp;&amp;读入数字<br>cnt++<br>否则flag置0</p>
+<p>else if 读入@&amp;&amp;flag=1&amp;&amp;cnt&gt;0&amp;&amp;cnt&lt;5<br>flag=2<br>cnt=0<br>否则flag置0</p>
+<p>else if flag=2&amp;&amp;读入数字或者字母<br>cnt++<br>否则flag=0</p>
+<p>else if 读入: &amp;&amp; flag=2 &amp;&amp; cnt==8<br>flag=3<br>cnt=0<br>否则flag=0</p>
+<p>else if  读入空格 &amp;&amp;  flag=3 &amp;&amp; cnt=0<br>flag仍为3</p>
+<p>else if 读入$ &amp;&amp; flag=3<br>flag=4<br>state = 1(1寄存2存储)<br>否则flag=0</p>
+<p>else if 读入* &amp;&amp; flag=3<br>flag=4<br>state=2<br>否则flag=0</p>
+<p>else if 读入数字&amp;&amp;flag=4<br>cnt++<br>否则flag=0</p>
+<p>else if  读入空格 &amp;&amp;  flag=4 &amp;&amp; cnt=0<br>flag仍为4</p>
+<p>else if  读入&lt; &amp;&amp; flag=4 &amp;&amp; cnt&gt;0&amp;&amp;cnt&lt;5<br>flag=5<br>cnt=0<br>否则flag=0</p>
+<p>else if  读入=&amp;&amp;flag=5<br>flag=6<br>否则flag=0</p>
+<p>else if  读入空格 &amp;&amp;  flag=6 &amp;&amp; cnt=0<br>flag仍为6</p>
+<p>else if  读入数字或者字母&amp;&amp;flag=6<br>cnt++<br>否则flag=0</p>
+<p>else if  读入# &amp;&amp; flag=6 &amp;&amp; cnt==8<br>flag=7<br>结束识别</p>
+<p>else<br>flag = 0<br>state = 0</p>
+<p>优化：<br>合并空格判断部分<br>合并10进制判断部分<br>合并16进制判断部分</p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/tutorial/verilog/verilog-5/verilog-5-13/">CPU序列检查</a></li>
+</ul>
+<h3 id="Timer"><a href="#Timer" class="headerlink" title="Timer"></a>Timer</h3><blockquote>
+<p>交了21遍hh Timer你欠我的拿什么还</p>
+</blockquote>
+<ol>
+<li>要理解非阻塞赋值！！！&lt;=<br>延迟两个周期再操作<br>就是cnt==2再操作</li>
+<li>对于延迟类，<br>老老实实设延迟变量<br>严格激活条件（cnt=0且有激活信号）<br>激活信号可能持续不止一个周期<br>只响应第一个周期的信号即可</li>
+<li>严格按照状态转移方程写代码</li>
+<li>异步复位:<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span>@(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">posedge</span> reset)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/tutorial/verilog/verilog-5/verilog-5-14/">Verilog实现定时器</a></li>
+</ul>
+<h2 id="TestBench的写法"><a href="#TestBench的写法" class="headerlink" title="TestBench的写法"></a>TestBench的写法</h2><blockquote>
+<p>这里给出一个示例(Timer)</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> tb;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Inputs</span></span><br><span class="line">	<span class="keyword">reg</span> clk;</span><br><span class="line">	<span class="keyword">reg</span> reset;</span><br><span class="line">	<span class="keyword">reg</span> on;</span><br><span class="line">	<span class="keyword">reg</span> off;</span><br><span class="line">	<span class="keyword">reg</span> ok;</span><br><span class="line">	<span class="keyword">reg</span> mode;</span><br><span class="line">	<span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] value;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Outputs</span></span><br><span class="line">	<span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] out;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Instantiate the Unit Under Test (UUT)</span></span><br><span class="line">	timer uut (</span><br><span class="line">		<span class="variable">.clk</span>(clk), </span><br><span class="line">		<span class="variable">.reset</span>(reset), </span><br><span class="line">		<span class="variable">.on</span>(on), </span><br><span class="line">		<span class="variable">.off</span>(off), </span><br><span class="line">		<span class="variable">.ok</span>(ok), </span><br><span class="line">		<span class="variable">.mode</span>(mode), </span><br><span class="line">		<span class="variable">.value</span>(value), </span><br><span class="line">		<span class="variable">.out</span>(out)</span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		<span class="comment">// Initialize Inputs</span></span><br><span class="line">		clk = <span class="number">0</span>;</span><br><span class="line">		reset = <span class="number">0</span>;</span><br><span class="line">		on = <span class="number">0</span>;</span><br><span class="line">		off = <span class="number">0</span>;</span><br><span class="line">		ok = <span class="number">0</span>;</span><br><span class="line">		mode = <span class="number">0</span>;</span><br><span class="line">		value = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		reset = <span class="number">1</span>;</span><br><span class="line">       #<span class="number">10</span></span><br><span class="line">		reset = <span class="number">0</span>;</span><br><span class="line">		<span class="comment">// Add stimulus here</span></span><br><span class="line">		#<span class="number">10</span></span><br><span class="line">		on = <span class="number">1</span>;</span><br><span class="line">		#<span class="number">10</span></span><br><span class="line">		on = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">5</span> </span><br><span class="line">		off=<span class="number">1</span>;</span><br><span class="line">		#<span class="number">5</span> off = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">10</span></span><br><span class="line">		ok = <span class="number">1</span>;</span><br><span class="line">		mode = <span class="number">1</span>;</span><br><span class="line">		value = <span class="number">2</span>;</span><br><span class="line">		#<span class="number">10</span></span><br><span class="line">		ok = <span class="number">0</span>;</span><br><span class="line">		mode = <span class="number">0</span>;</span><br><span class="line">		value = <span class="number">0</span>;</span><br><span class="line">		#<span class="number">30</span></span><br><span class="line">		off = <span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"> <span class="keyword">always</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>下面是正确的定时器程序跑出的波形图示例</p>
+</blockquote>
+<p><img src="graph1.png" alt="graph1"></p>
+<h1 id="MIP"><a href="#MIP" class="headerlink" title="MIP"></a>MIP</h1><blockquote>
+<p>主播只在哈密顿环卡了许久，这里简单描述一下心得</p>
+</blockquote>
+<h3 id="不要忘了写-text好吧"><a href="#不要忘了写-text好吧" class="headerlink" title="不要忘了写.text好吧"></a>不要忘了写.text好吧</h3><blockquote>
+<p>也给一点初始化方法</p>
+</blockquote>
+<figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">.data</span></span><br><span class="line">G: <span class="meta">.word</span> <span class="number">0</span>:<span class="number">64</span> <span class="comment">#G[8][8]</span></span><br><span class="line"><span class="comment"># G: .space 256 8*8*4</span></span><br><span class="line"><span class="keyword">book: </span><span class="meta">.word</span> <span class="number">0</span>:<span class="number">8</span></span><br></pre></td></tr></table></figure>
+<h3 id="合理使用marco"><a href="#合理使用marco" class="headerlink" title="合理使用marco"></a>合理使用marco</h3><ul>
+<li>不要为了简单上来就写一堆marco把自己绕晕了</li>
+<li>不要拼错marco</li>
+<li>不要忘了写 .end_marco</li>
+</ul>
+<blockquote>
+<p>这里给一些常用的.marco</p>
+</blockquote>
+<figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">.macro</span> Input(%in)</span><br><span class="line">	li $<span class="built_in">v0</span> <span class="number">5</span></span><br><span class="line">	<span class="keyword">syscall</span></span><br><span class="line"><span class="keyword"></span>	<span class="keyword">move </span>%in ,$<span class="built_in">v0</span></span><br><span class="line">.end_macro </span><br><span class="line"></span><br><span class="line">.marco Output(%out)</span><br><span class="line">    <span class="keyword">move </span>%out ,$<span class="built_in">v0</span></span><br><span class="line">    li $<span class="built_in">v0</span> ,<span class="number">1</span></span><br><span class="line">    <span class="keyword">syscall</span></span><br><span class="line"><span class="keyword"></span>.end_marco</span><br><span class="line"></span><br><span class="line">.marco end</span><br><span class="line">    li $<span class="built_in">v0</span>, <span class="number">10</span></span><br><span class="line">    <span class="keyword">syscall</span></span><br><span class="line"><span class="keyword"></span><span class="meta">.end</span>.marco</span><br><span class="line"></span><br><span class="line"><span class="meta">.macro</span> push(%a)</span><br><span class="line">	<span class="keyword">addi </span>$<span class="built_in">sp</span>,$<span class="built_in">sp</span>,-<span class="number">4</span></span><br><span class="line">	<span class="keyword">sw </span>%a,<span class="number">0</span>($<span class="built_in">sp</span>)</span><br><span class="line">.end_macro </span><br><span class="line"></span><br><span class="line"><span class="meta">.macro</span> pop(%<span class="keyword">b)</span></span><br><span class="line"><span class="keyword"></span>	<span class="keyword">lw </span>%<span class="keyword">b,0($sp)</span></span><br><span class="line"><span class="keyword"></span>	<span class="keyword">addi </span>$<span class="built_in">sp</span>,$<span class="built_in">sp</span>,<span class="number">4</span></span><br><span class="line">.end_macro </span><br><span class="line"></span><br><span class="line"><span class="meta">.macro</span> get_2_Address(%ans,%i,%<span class="keyword">j)</span></span><br><span class="line"><span class="keyword"></span>	<span class="keyword">sll </span>%ans,%i,<span class="number">3</span></span><br><span class="line">	<span class="keyword">add </span>%ans,%ans,%<span class="keyword">j</span></span><br><span class="line"><span class="keyword"></span>	<span class="keyword">sll </span>%ans,%ans,<span class="number">2</span></span><br><span class="line">.end_macro <span class="comment">#这里是8*8数组，ans=(i*8+j)*4</span></span><br><span class="line"></span><br><span class="line"><span class="meta">.macro</span> get_1_Address(%ans,%x)</span><br><span class="line">	<span class="keyword">sll </span>%ans,%x,<span class="number">2</span></span><br><span class="line">.end_macro </span><br></pre></td></tr></table></figure>
+<h3 id="寄存器的使用"><a href="#寄存器的使用" class="headerlink" title="寄存器的使用"></a>寄存器的使用</h3><p>我们要规定好固定寄存器的固定使用<br>比如说作为循环变量，数组地址，取出的数组数，恒1变量，标志位等等<br>那么在函数里这个寄存器就固定用于这个使用，避免数量一多赋值混淆不清</p>
+<h3 id="函数的寄存器出栈和入栈问题"><a href="#函数的寄存器出栈和入栈问题" class="headerlink" title="函数的寄存器出栈和入栈问题"></a>函数的寄存器出栈和入栈问题</h3><p>想清楚哪些寄存器我们在递归调用函数时可能会用到并改变寄存器的值<br>比如循环变量、函数输入参数等等<br>对于储存这些值的变量我们要在调用函数前放入栈中，调用函数后拿出</p>
+<h3 id="为了保证结构性，先写C语言程序，载翻译成MIPS"><a href="#为了保证结构性，先写C语言程序，载翻译成MIPS" class="headerlink" title="为了保证结构性，先写C语言程序，载翻译成MIPS"></a>为了保证结构性，先写C语言程序，载翻译成MIPS</h3><blockquote>
+<p>这里以主播写的Halmiton函数为例体现以上两点</p>
+</blockquote>
+<figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#我们约定表示t0用来表示x</span></span><br><span class="line"><span class="comment">#t4只用来置1</span></span><br><span class="line"><span class="comment">#t1用来表示循环变量i</span></span><br><span class="line"><span class="comment">#t2用来表示i位移后的位置</span></span><br><span class="line"><span class="comment">#t3用来表示数组book的数</span></span><br><span class="line"><span class="comment">#t6用来表示数组G的数字</span></span><br><span class="line"><span class="comment">#t5用来表示flag</span></span><br><span class="line"><span class="symbol">dfs:</span></span><br><span class="line"><span class="keyword">move </span>$<span class="built_in">t0</span>,$<span class="built_in">a0</span></span><br><span class="line">get_1_Address($<span class="built_in">t2</span>,$<span class="built_in">t0</span>)</span><br><span class="line"><span class="keyword">sw </span>$<span class="built_in">t4</span>,<span class="keyword">book($t2)</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">li $<span class="built_in">t5</span>, <span class="number">1</span></span><br><span class="line">li $<span class="built_in">t2</span>,<span class="number">0</span></span><br><span class="line">li $<span class="built_in">t1</span>,<span class="number">0</span></span><br><span class="line"><span class="symbol">for_dots_check:</span></span><br><span class="line"><span class="keyword">bge </span>$<span class="built_in">t1</span>,$<span class="built_in">s0</span>,for_dots_end</span><br><span class="line">get_1_Address($<span class="built_in">t2</span>,$<span class="built_in">t1</span>)</span><br><span class="line"><span class="keyword">lw </span>$<span class="built_in">t3</span>,<span class="keyword">book($t2)</span></span><br><span class="line"><span class="keyword"></span><span class="keyword">and </span>$<span class="built_in">t5</span>,$<span class="built_in">t5</span>,$<span class="built_in">t3</span></span><br><span class="line"><span class="keyword">addi </span>$<span class="built_in">t1</span>,$<span class="built_in">t1</span>,<span class="number">1</span></span><br><span class="line"><span class="keyword">j </span>for_dots_check</span><br><span class="line"><span class="symbol">for_dots_end:</span></span><br><span class="line"></span><br><span class="line">get_2_Address($<span class="built_in">t2</span>,$<span class="built_in">t0</span>,$<span class="built_in">zero</span>)</span><br><span class="line"><span class="keyword">lw </span>$<span class="built_in">t6</span>,G($<span class="built_in">t2</span>)</span><br><span class="line"><span class="keyword">and </span>$<span class="built_in">t6</span>,$<span class="built_in">t6</span>,$<span class="built_in">t5</span></span><br><span class="line"><span class="keyword">beq </span>$<span class="built_in">t6</span>,$<span class="built_in">zero</span>,if_else</span><br><span class="line"><span class="keyword">move </span>$<span class="built_in">v0</span>,$<span class="built_in">t4</span></span><br><span class="line"><span class="keyword">jr </span>$<span class="built_in">ra</span></span><br><span class="line"><span class="symbol">if_else:</span></span><br><span class="line"></span><br><span class="line">li $<span class="built_in">t1</span>,<span class="number">0</span></span><br><span class="line"><span class="symbol">for_lines_check:</span></span><br><span class="line"><span class="keyword">bge </span>$<span class="built_in">t1</span>,$<span class="built_in">s0</span>,for_lines_end</span><br><span class="line">get_1_Address($<span class="built_in">t2</span>,$<span class="built_in">t1</span>)</span><br><span class="line"><span class="keyword">lw </span>$<span class="built_in">t3</span>,<span class="keyword">book($t2)</span></span><br><span class="line"><span class="keyword"></span><span class="keyword">xor </span>$<span class="built_in">t3</span>,$<span class="built_in">t3</span>,$<span class="built_in">t4</span> <span class="comment">#取反book[i]</span></span><br><span class="line">get_2_Address($<span class="built_in">t2</span>,$<span class="built_in">t0</span>,$<span class="built_in">t1</span>)</span><br><span class="line"><span class="keyword">lw </span>$<span class="built_in">t6</span>,G($<span class="built_in">t2</span>)<span class="comment">#G[x][i]</span></span><br><span class="line"><span class="keyword">and </span>$<span class="built_in">t3</span>,$<span class="built_in">t6</span>,$<span class="built_in">t3</span></span><br><span class="line"><span class="keyword">beq </span>$<span class="built_in">t3</span>,$<span class="built_in">zero</span>,if_2_end</span><br><span class="line"><span class="keyword">move </span>$<span class="built_in">a0</span>,$<span class="built_in">t1</span></span><br><span class="line">push($<span class="built_in">t1</span>)</span><br><span class="line">push($<span class="built_in">t0</span>)</span><br><span class="line">push($<span class="built_in">ra</span>)</span><br><span class="line"><span class="keyword">jal </span>dfs</span><br><span class="line">pop($<span class="built_in">ra</span>)</span><br><span class="line">pop($<span class="built_in">t0</span>)</span><br><span class="line">pop($<span class="built_in">t1</span>)</span><br><span class="line"><span class="symbol">if_2_end:</span></span><br><span class="line"><span class="keyword">addi </span>$<span class="built_in">t1</span>,$<span class="built_in">t1</span>,<span class="number">1</span></span><br><span class="line"><span class="keyword">j </span>for_lines_check</span><br><span class="line"><span class="symbol">for_lines_end:</span></span><br><span class="line"></span><br><span class="line">get_1_Address($<span class="built_in">t2</span>,$<span class="built_in">t0</span>)</span><br><span class="line"><span class="keyword">sw </span>$<span class="built_in">zero</span>,<span class="keyword">book($t2)</span></span><br><span class="line"><span class="keyword"></span><span class="keyword">jr </span>$<span class="built_in">ra</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://cscore.buaa.edu.cn/tutorial/mips/mips-5/mips5-13/">哈密顿环</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://ranyechai.site">Caxirye</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://ranyechai.site/2025/09/14/copre/">http://ranyechai.site/2025/09/14/copre/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://ranyechai.site" target="_blank">PlutoC</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MIPS/">MIPS</a><a class="post-meta__tags" href="/tags/CO-Pre/">CO_Pre</a><a class="post-meta__tags" href="/tags/verilog/">verilog</a><a class="post-meta__tags" href="/tags/debug-thoughts/">debug_thoughts</a></div><div class="post-share"><div class="social-share" data-image="/images/COpreCover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/09/16/COpre-MIP-1/" title="COpre_MIP_1"><img class="cover" src="/images/COpreCover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">COpre_MIP_1</div></div><div class="info-2"><div class="info-item-1">综合了讨论区有关MIPS内容的两篇精华帖写出的一篇内容（）其实是在法科社课打卡之前消磨时间写的，写完就准备开溜</div></div></div></a><a class="pagination-related" href="/2025/07/19/PCA/" title="PCA"><img class="cover" src="/images/mathcover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">PCA</div></div><div class="info-2"><div class="info-item-1">数学建模有关评价决策类部分的第六讲~</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/09/16/COpre-MIP-1/" title="COpre_MIP_1"><img class="cover" src="/images/COpreCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="info-item-2">COpre_MIP_1</div></div><div class="info-2"><div class="info-item-1">综合了讨论区有关MIPS内容的两篇精华帖写出的一篇内容（）其实是在法科社课打卡之前消磨时间写的，写完就准备开溜</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Caxirye</div><div class="author-info-description">just explore</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ranye-chai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Ranye-chai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#verilog"><span class="toc-number">1.</span> <span class="toc-text">verilog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E6%A2%AF"><span class="toc-number">1.0.1.</span> <span class="toc-text">电梯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E6%A3%80%E6%9F%A5challenge"><span class="toc-number">1.0.2.</span> <span class="toc-text">CPU检查challenge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Timer"><span class="toc-number">1.0.3.</span> <span class="toc-text">Timer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TestBench%E7%9A%84%E5%86%99%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">TestBench的写法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MIP"><span class="toc-number">2.</span> <span class="toc-text">MIP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%A6%81%E5%BF%98%E4%BA%86%E5%86%99-text%E5%A5%BD%E5%90%A7"><span class="toc-number">2.0.1.</span> <span class="toc-text">不要忘了写.text好吧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E7%90%86%E4%BD%BF%E7%94%A8marco"><span class="toc-number">2.0.2.</span> <span class="toc-text">合理使用marco</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.0.3.</span> <span class="toc-text">寄存器的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8%E5%87%BA%E6%A0%88%E5%92%8C%E5%85%A5%E6%A0%88%E9%97%AE%E9%A2%98"><span class="toc-number">2.0.4.</span> <span class="toc-text">函数的寄存器出栈和入栈问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BA%86%E4%BF%9D%E8%AF%81%E7%BB%93%E6%9E%84%E6%80%A7%EF%BC%8C%E5%85%88%E5%86%99C%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%EF%BC%8C%E8%BD%BD%E7%BF%BB%E8%AF%91%E6%88%90MIPS"><span class="toc-number">2.0.5.</span> <span class="toc-text">为了保证结构性，先写C语言程序，载翻译成MIPS</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/10/12/P0%E6%80%BB%E7%BB%93/" title="P0总结"><img src="/images/COclassCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="P0总结"/></a><div class="content"><a class="title" href="/2025/10/12/P0%E6%80%BB%E7%BB%93/" title="P0总结">P0总结</a><time datetime="2025-10-12T09:07:43.000Z" title="发表于 2025-10-12 17:07:43">2025-10-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/12/gitTIPS/" title="gitTIPS"><img src="/images/GitCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="gitTIPS"/></a><div class="content"><a class="title" href="/2025/10/12/gitTIPS/" title="gitTIPS">gitTIPS</a><time datetime="2025-10-12T02:57:10.000Z" title="发表于 2025-10-12 10:57:10">2025-10-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/30/Pre%E4%B8%8A%E6%9C%BA%E6%80%BB%E7%BB%93/" title="Pre上机总结"><img src="/images/COclassCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Pre上机总结"/></a><div class="content"><a class="title" href="/2025/09/30/Pre%E4%B8%8A%E6%9C%BA%E6%80%BB%E7%BB%93/" title="Pre上机总结">Pre上机总结</a><time datetime="2025-09-30T15:46:46.000Z" title="发表于 2025-09-30 23:46:46">2025-09-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/20/Git-Reset/" title="Git_Reset"><img src="/images/GitCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git_Reset"/></a><div class="content"><a class="title" href="/2025/09/20/Git-Reset/" title="Git_Reset">Git_Reset</a><time datetime="2025-09-20T13:52:52.000Z" title="发表于 2025-09-20 21:52:52">2025-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/20/Git-Instruction/" title="Git_Instruction"><img src="/images/GitCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git_Instruction"/></a><div class="content"><a class="title" href="/2025/09/20/Git-Instruction/" title="Git_Instruction">Git_Instruction</a><time datetime="2025-09-20T13:33:13.000Z" title="发表于 2025-09-20 21:33:13">2025-09-20</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/top.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Caxirye</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
