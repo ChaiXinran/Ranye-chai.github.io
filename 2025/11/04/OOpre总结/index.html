@@ -1,0 +1,416 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>OOpre总结 | PlutoC</title><meta name="author" content="Caxirye"><meta name="copyright" content="Caxirye"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="结课咯~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OOpre总结">
+<meta property="og:url" content="http://ranyechai.site/2025/11/04/OOpre%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="PlutoC">
+<meta property="og:description" content="结课咯~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ranyechai.site/images/OOpreWork.jpg">
+<meta property="article:published_time" content="2025-11-04T15:45:22.000Z">
+<meta property="article:modified_time" content="2025-11-06T04:11:56.421Z">
+<meta property="article:author" content="Caxirye">
+<meta property="article:tag" content="OOpre">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ranyechai.site/images/OOpreWork.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OOpre总结",
+  "url": "http://ranyechai.site/2025/11/04/OOpre%E6%80%BB%E7%BB%93/",
+  "image": "http://ranyechai.site/images/OOpreWork.jpg",
+  "datePublished": "2025-11-04T15:45:22.000Z",
+  "dateModified": "2025-11-06T04:11:56.421Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Caxirye",
+      "url": "http://ranyechai.site"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/plutoc-favicon.ico"><link rel="canonical" href="http://ranyechai.site/2025/11/04/OOpre%E6%80%BB%E7%BB%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'OOpre总结',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/back.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/OOpreWork.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">PlutoC</span></a><a class="nav-page-title" href="/"><span class="site-name">OOpre总结</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">OOpre总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-04T15:45:22.000Z" title="发表于 2025-11-04 23:45:22">2025-11-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-06T04:11:56.421Z" title="更新于 2025-11-06 12:11:56">2025-11-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OO/">OO</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OO/pre/">pre</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OO/pre/homework/">homework</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h1><h2 id="最终架构"><a href="#最终架构" class="headerlink" title="最终架构"></a>最终架构</h2><p><img src="hw8.png" alt="figure"></p>
+<hr>
+<h2 id="具体模块"><a href="#具体模块" class="headerlink" title="具体模块"></a>具体模块</h2><h3 id="指令处理Slover"><a href="#指令处理Slover" class="headerlink" title="指令处理Slover"></a>指令处理Slover</h3><p>为了保持<code>main</code>函数的简洁,我们将对输入指令的处理单独拿出来.<br>识别指令的类型,调用相应的方法实现指令的效果.</p>
+<h3 id="冒险者Adventure"><a href="#冒险者Adventure" class="headerlink" title="冒险者Adventure"></a>冒险者Adventure</h3><p>冒险者本身有4个属性:<code>hitPoint</code>,<code>atk</code>,<code>def</code>,<code>mana</code><br>为了方便这些属性的获取和更改,我们建立相应的<code>get</code>和<code>set</code>方法.</p>
+<h4 id="物品Item"><a href="#物品Item" class="headerlink" title="物品Item"></a>物品Item</h4><ul>
+<li><strong>Bottle</strong>:<ul>
+<li><code>HpBottle</code>增加被使用者的<code>hitPoint</code>值</li>
+<li><code>AtkBottle</code>增加被使用者的<code>atk</code>值</li>
+<li><code>DefBottle</code>增加被使用者的<code>def</code>值</li>
+<li><code>ManaBottle</code>增加被使用者的<code>mana</code>值</li>
+</ul>
+</li>
+<li><strong>Equipment</strong><ul>
+<li><code>Armour</code>加成被使用者的最终<code>def</code>值</li>
+<li><code>Weapon</code><ul>
+<li><code>Sword</code>加成被使用者的最终<code>atk</code>值</li>
+<li><code>MagicBook</code>消耗使用者<code>mana</code>,加成被使用者的最终<code>atk</code>值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Spell</strong><ul>
+<li><code>HealSpell</code>消耗使用者<code>mana</code>,加成被使用者的<code>hitPoint</code>值</li>
+<li><code>AtkSpell</code>消耗使用者<code>mana</code>,减少被使用者的<code>hitPoint</code>值<br>对于这些物品,我们在冒险者中建立相关的<code>botList</code>,<code>equipList</code>,<code>spellList</code>.<h4 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h4>用于对冒险者的物品进行管理.侧重于实现<strong>拥有</strong>.</li>
+</ul>
+</li>
+<li>从<code>botList</code>中添加/删除<code>Bottle</code></li>
+<li>从<code>equipList</code>中添加/删除<code>Equipment</code></li>
+<li>从<code>spellList</code>中添加/删除<code>Spell</code><h4 id="Backpack"><a href="#Backpack" class="headerlink" title="Backpack"></a>Backpack</h4>用于对冒险者的物品进行管理.侧重于实现<strong>携带</strong>.</li>
+<li>从<code>botTakeList</code>(上限为10)中添加/删除<code>Bottle</code></li>
+<li>设置携带的装备<code>armourTake</code>,<code>weaponTake</code><h4 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h4>实现对冒险者<strong>金钱</strong>的管理.</li>
+<li>购买具有相应法力值的<code>Bottle</code>或者<code>Equipment</code></li>
+<li>继承死亡冒险者的金钱<h4 id="Fight"><a href="#Fight" class="headerlink" title="Fight"></a>Fight</h4>实现冒险者之间的战斗.</li>
+<li>物理攻击 <code>WeaponTake</code>不存在或者<code>Type</code>为<code>Sword</code></li>
+<li>魔法攻击 <code>WeaponTake</code>的<code>Type</code>为<code>MagicBook</code><h3 id="雇佣关系"><a href="#雇佣关系" class="headerlink" title="雇佣关系"></a>雇佣关系</h3>实现对于冒险者之间的关系的处理.一个冒险者只能有一个直属上级,并且雇佣关系是单向的.</li>
+<li>添加/删除雇佣关系</li>
+<li>批量添加雇佣关系(递归下降)</li>
+<li>判断关系<ul>
+<li>上级 直属上级,所有上级的上级</li>
+<li>下级 直属下级,所有下级的下级</li>
+<li>盟友 自己以及所有的上下级</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="迭代调整"><a href="#迭代调整" class="headerlink" title="迭代调整"></a>迭代调整</h2><h3 id="hw2"><a href="#hw2" class="headerlink" title="hw2"></a>hw2</h3><ul>
+<li>学会<code>ArrayList</code>的使用</li>
+<li>建立最基础的<code>Adventure</code>类,<code>Bottle</code>类,<code>Equipment</code>类</li>
+<li>指令类型<ul>
+<li>添加/删除冒险者</li>
+<li>为某个冒险者添加/删除药水瓶</li>
+<li>为某个冒险者添加/删除装备<h3 id="hw3"><a href="#hw3" class="headerlink" title="hw3"></a>hw3</h3></li>
+</ul>
+</li>
+<li>继承以及接口的使用</li>
+<li>新增内容<ul>
+<li>新增冒险者的4个属性</li>
+<li>引入法术<code>Spell</code></li>
+<li>详细划分<code>Bottle</code> 4种药水瓶,继承<code>Bottle</code>父类.</li>
+<li>引入背包系统</li>
+<li>引入可用物品 新增接口<code>Usage</code> 判断物品是否可用<ul>
+<li><code>Bottle</code> 拥有并携带</li>
+<li><code>Spell</code> 学习过并且冒险者<code>mana</code>属性大于<code>manaCost</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>新增指令<ul>
+<li>使冒险者学习法术</li>
+<li>使冒险者携带某个物品</li>
+<li>冒险者对某一个目标使用某个物品</li>
+<li>移除物品(合并之前的移除指令)<h3 id="hw4"><a href="#hw4" class="headerlink" title="hw4"></a>hw4</h3></li>
+</ul>
+</li>
+<li>知识学习<ul>
+<li>深克隆与浅克隆</li>
+<li>==/equals?</li>
+<li>String类的使用(包括substring的使用)</li>
+<li>Map接口的实现如何比较key的相等性</li>
+<li>遍历容器(迭代器的删除)</li>
+<li>Scanner.next()的使用</li>
+</ul>
+</li>
+<li>与迭代作业无关<h3 id="hw5"><a href="#hw5" class="headerlink" title="hw5"></a>hw5</h3></li>
+<li>知识学习<ul>
+<li>HashMap与HashSet</li>
+<li>工厂模式(类创建型模式)<ul>
+<li>简单工厂模式</li>
+<li>工厂模式</li>
+<li>抽象工厂模式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>新增内容<ul>
+<li>细分<code>Equipment</code>,继承父类</li>
+<li>实现背包中物品的数量控制</li>
+<li>新增战斗系统</li>
+<li>新增金钱系统</li>
+</ul>
+</li>
+<li>新增指令<ul>
+<li>冒险者去商店进行一次购买操作</li>
+<li>冒险者进行一次战斗<h3 id="hw6"><a href="#hw6" class="headerlink" title="hw6"></a>hw6</h3></li>
+</ul>
+</li>
+<li>知识学习<ul>
+<li>观察者模式</li>
+</ul>
+</li>
+<li>新增内容 雇佣关系的定义<ul>
+<li>新增<code>Employer</code>和<code>Employee</code>接口</li>
+<li>被观察者(<code>Employer</code>)需要援助,通知观察者(<code>Employee</code>)</li>
+</ul>
+</li>
+<li>新增指令<ul>
+<li>添加一个关系</li>
+<li>删除一个关系<h3 id="hw7"><a href="#hw7" class="headerlink" title="hw7"></a>hw7</h3></li>
+</ul>
+</li>
+<li>知识学习<ul>
+<li>文法</li>
+<li>词法语法分析</li>
+<li>递归下降</li>
+</ul>
+</li>
+<li>新增内容 批量添加雇佣关系<ul>
+<li>新增<code>Expr</code>(冒险者),<code>Term</code>(被雇佣者),<code>Factor</code>(标识符)</li>
+<li>词法分析<code>Lexer</code></li>
+<li>语法分析<code>Parser</code></li>
+</ul>
+</li>
+<li>新增指令 导入一组雇佣关系</li>
+</ul>
+<hr>
+<h1 id="使用Junit的心得与体会"><a href="#使用Junit的心得与体会" class="headerlink" title="使用Junit的心得与体会"></a>使用Junit的心得与体会</h1><ul>
+<li>最开始写觉得是一件很麻烦的事情,但是随着代码越来越复杂,涉及到的部分越来越多就会发现Junit的好处.经常在写Junit的过程中就发现了bug并解决了,节省了不少时间.</li>
+<li>测试方法<ul>
+<li>先测试一个方法内部没有问题,再以这个方法为基础测试其它方法.</li>
+<li>从整体的角度测试整个代码的运行架构</li>
+<li>使用Assert比较关键部分的预期值与实际值</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="学习OOpre的心得体会"><a href="#学习OOpre的心得体会" class="headerlink" title="学习OOpre的心得体会"></a>学习OOpre的心得体会</h1><ul>
+<li>从面向过程到面向对象的过程转变<ul>
+<li>从类的角度去看,使方法的编写更加清晰</li>
+</ul>
+</li>
+<li>从整体到局部的思维转变<ul>
+<li>以递归下降为例,只关注局部,使代码编写更加简洁</li>
+</ul>
+</li>
+<li>更深刻地理解封装的思想与内涵<ul>
+<li>只关心调用,不关心内部实现</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="对OOpre课程的简单建议"><a href="#对OOpre课程的简单建议" class="headerlink" title="对OOpre课程的简单建议"></a>对OOpre课程的简单建议</h1><p>很喜欢这门课,老师讲得非常好,助教很用心负责,作业也很有意思。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://ranyechai.site">Caxirye</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://ranyechai.site/2025/11/04/OOpre%E6%80%BB%E7%BB%93/">http://ranyechai.site/2025/11/04/OOpre%E6%80%BB%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://ranyechai.site" target="_blank">PlutoC</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OOpre/">OOpre</a><a class="post-meta__tags" href="/tags/java/">java</a></div><div class="post-share"><div class="social-share" data-image="/images/OOpreWork.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/11/P4-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P4-CPU-设计文档"><img class="cover" src="/images/COclassCover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">P4-CPU-设计文档</div></div><div class="info-2"><div class="info-item-1">数学竞赛🫠</div></div></div></a><a class="pagination-related" href="/2025/10/29/P3-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P3-CPU-设计文档"><img class="cover" src="/images/COclassCover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">P3-CPU-设计文档</div></div><div class="info-2"><div class="info-item-1">翘了离散来学构建CPUhhh</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/09/19/OOpre-Homework2/" title="OOpre_Homework2"><img class="cover" src="/images/OOpreWork.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-19</div><div class="info-item-2">OOpre_Homework2</div></div><div class="info-2"><div class="info-item-1">OOpre第二次作业，为什么没有第一次呢，因为第一次没什么好说的hh</div></div></div></a><a class="pagination-related" href="/2025/10/28/%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D/" title="递归下降"><img class="cover" src="/images/OOpreWork.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-28</div><div class="info-item-2">递归下降</div></div><div class="info-2"><div class="info-item-1">最后一次作业啦</div></div></div></a><a class="pagination-related" href="/2025/09/19/Junit/" title="Junit"><img class="cover" src="/images/JunitCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-19</div><div class="info-item-2">Junit</div></div><div class="info-2"><div class="info-item-1">这里简单讨论了Junit，同时记录了一点checkstyle的配置。</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Caxirye</div><div class="author-info-description">just explore</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ranye-chai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Ranye-chai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.</span> <span class="toc-text">架构设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">最终架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%A8%A1%E5%9D%97"><span class="toc-number">1.2.</span> <span class="toc-text">具体模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%A4%84%E7%90%86Slover"><span class="toc-number">1.2.1.</span> <span class="toc-text">指令处理Slover</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%92%E9%99%A9%E8%80%85Adventure"><span class="toc-number">1.2.2.</span> <span class="toc-text">冒险者Adventure</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E5%93%81Item"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">物品Item</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Factory"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Factory</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Backpack"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">Backpack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Store"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">Store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Fight"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">Fight</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%87%E4%BD%A3%E5%85%B3%E7%B3%BB"><span class="toc-number">1.2.3.</span> <span class="toc-text">雇佣关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E8%B0%83%E6%95%B4"><span class="toc-number">1.3.</span> <span class="toc-text">迭代调整</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hw2"><span class="toc-number">1.3.1.</span> <span class="toc-text">hw2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw3"><span class="toc-number">1.3.2.</span> <span class="toc-text">hw3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw4"><span class="toc-number">1.3.3.</span> <span class="toc-text">hw4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw5"><span class="toc-number">1.3.4.</span> <span class="toc-text">hw5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw6"><span class="toc-number">1.3.5.</span> <span class="toc-text">hw6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw7"><span class="toc-number">1.3.6.</span> <span class="toc-text">hw7</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Junit%E7%9A%84%E5%BF%83%E5%BE%97%E4%B8%8E%E4%BD%93%E4%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">使用Junit的心得与体会</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0OOpre%E7%9A%84%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">学习OOpre的心得体会</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9OOpre%E8%AF%BE%E7%A8%8B%E7%9A%84%E7%AE%80%E5%8D%95%E5%BB%BA%E8%AE%AE"><span class="toc-number">4.</span> <span class="toc-text">对OOpre课程的简单建议</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/11/17/P5-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P5-CPU-设计文档"><img src="/images/COclassCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="P5-CPU-设计文档"/></a><div class="content"><a class="title" href="/2025/11/17/P5-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P5-CPU-设计文档">P5-CPU-设计文档</a><time datetime="2025-11-17T04:05:50.000Z" title="发表于 2025-11-17 12:05:50">2025-11-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/11/P4-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P4-CPU-设计文档"><img src="/images/COclassCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="P4-CPU-设计文档"/></a><div class="content"><a class="title" href="/2025/11/11/P4-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P4-CPU-设计文档">P4-CPU-设计文档</a><time datetime="2025-11-11T02:10:34.000Z" title="发表于 2025-11-11 10:10:34">2025-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/04/OOpre%E6%80%BB%E7%BB%93/" title="OOpre总结"><img src="/images/OOpreWork.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OOpre总结"/></a><div class="content"><a class="title" href="/2025/11/04/OOpre%E6%80%BB%E7%BB%93/" title="OOpre总结">OOpre总结</a><time datetime="2025-11-04T15:45:22.000Z" title="发表于 2025-11-04 23:45:22">2025-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/29/P3-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P3-CPU-设计文档"><img src="/images/COclassCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="P3-CPU-设计文档"/></a><div class="content"><a class="title" href="/2025/10/29/P3-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P3-CPU-设计文档">P3-CPU-设计文档</a><time datetime="2025-10-29T05:52:41.000Z" title="发表于 2025-10-29 13:52:41">2025-10-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/28/%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D/" title="递归下降"><img src="/images/OOpreWork.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="递归下降"/></a><div class="content"><a class="title" href="/2025/10/28/%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D/" title="递归下降">递归下降</a><time datetime="2025-10-28T11:07:20.000Z" title="发表于 2025-10-28 19:07:20">2025-10-28</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/top.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Caxirye</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
