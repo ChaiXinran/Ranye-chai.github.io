@@ -1,0 +1,405 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>P6-CPU-设计文档 | PlutoC</title><meta name="author" content="Caxirye"><meta name="copyright" content="Caxirye"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="极限完成woc,这周事还挺多，但这周有剧院魅影哈哈哈哈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P6-CPU-设计文档">
+<meta property="og:url" content="http://ranyechai.site/2025/11/24/P6-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="PlutoC">
+<meta property="og:description" content="极限完成woc,这周事还挺多，但这周有剧院魅影哈哈哈哈">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ranyechai.site/images/COclassCover.jpg">
+<meta property="article:published_time" content="2025-11-24T02:59:21.000Z">
+<meta property="article:modified_time" content="2025-11-24T04:28:01.304Z">
+<meta property="article:author" content="Caxirye">
+<meta property="article:tag" content="CO">
+<meta property="article:tag" content="codeing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ranyechai.site/images/COclassCover.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "P6-CPU-设计文档",
+  "url": "http://ranyechai.site/2025/11/24/P6-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/",
+  "image": "http://ranyechai.site/images/COclassCover.jpg",
+  "datePublished": "2025-11-24T02:59:21.000Z",
+  "dateModified": "2025-11-24T04:28:01.304Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Caxirye",
+      "url": "http://ranyechai.site"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/plutoc-favicon.ico"><link rel="canonical" href="http://ranyechai.site/2025/11/24/P6-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'P6-CPU-设计文档',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/back.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/COclassCover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">PlutoC</span></a><a class="nav-page-title" href="/"><span class="site-name">P6-CPU-设计文档</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">P6-CPU-设计文档</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-24T02:59:21.000Z" title="发表于 2025-11-24 10:59:21">2025-11-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-24T04:28:01.304Z" title="更新于 2025-11-24 12:28:01">2025-11-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CO/">CO</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="指令集"><a href="#指令集" class="headerlink" title="指令集"></a>指令集</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类:"></a>分类:</h2><h4 id="alu-type-add-sub-and-or-slt-sltu"><a href="#alu-type-add-sub-and-or-slt-sltu" class="headerlink" title="alu_type:add,sub,and,or,slt,sltu"></a>alu_type:add,sub,and,or,slt,sltu</h4><h4 id="alu-imm-addi-andi-ori"><a href="#alu-imm-addi-andi-ori" class="headerlink" title="alu_imm:addi,andi,ori"></a>alu_imm:addi,andi,ori</h4><h4 id="mdu-mult-multu-div-divu"><a href="#mdu-mult-multu-div-divu" class="headerlink" title="mdu:mult,multu,div,divu"></a>mdu:mult,multu,div,divu</h4><h4 id="mf-mfhi-mflo"><a href="#mf-mfhi-mflo" class="headerlink" title="mf:mfhi,mflo"></a>mf:mfhi,mflo</h4><h4 id="mt-mthi-mtlo"><a href="#mt-mthi-mtlo" class="headerlink" title="mt:mthi,mtlo"></a>mt:mthi,mtlo</h4><h4 id="LdWd-lw-lb-lh"><a href="#LdWd-lw-lb-lh" class="headerlink" title="LdWd:lw,lb,lh"></a>LdWd:lw,lb,lh</h4><h4 id="StWd-sw-sb-sh"><a href="#StWd-sw-sb-sh" class="headerlink" title="StWd:sw,sb,sh"></a>StWd:sw,sb,sh</h4><h4 id="branch-beq-bne"><a href="#branch-beq-bne" class="headerlink" title="branch:beq,bne"></a>branch:beq,bne</h4><h4 id="special-lui"><a href="#special-lui" class="headerlink" title="special:lui"></a>special:lui</h4><h4 id="jump-j-jal-jr"><a href="#jump-j-jal-jr" class="headerlink" title="jump:j,jal,jr"></a>jump:j,jal,jr</h4><h1 id="新增模块"><a href="#新增模块" class="headerlink" title="新增模块"></a>新增模块</h1><h2 id="MDU"><a href="#MDU" class="headerlink" title="MDU"></a>MDU</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">端口名称</th>
+<th style="text-align:center">方向</th>
+<th style="text-align:center">位宽</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">clk</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">reset</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">start</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">A</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">32</td>
+</tr>
+<tr>
+<td style="text-align:center">B</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">32</td>
+</tr>
+<tr>
+<td style="text-align:center">MDUOp</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">HI</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">32</td>
+</tr>
+<tr>
+<td style="text-align:center">LO</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">32</td>
+</tr>
+<tr>
+<td style="text-align:center">out</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">32</td>
+</tr>
+<tr>
+<td style="text-align:center">busy</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="lwEXT"><a href="#lwEXT" class="headerlink" title="lwEXT"></a>lwEXT</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">端口名称</th>
+<th style="text-align:center">方向</th>
+<th style="text-align:center">位宽</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Din</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">32</td>
+</tr>
+<tr>
+<td style="text-align:center">Addr</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">lwOp</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">Dout</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">32</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="控制信号"><a href="#控制信号" class="headerlink" title="控制信号"></a>控制信号</h1><h2 id="ALUOp"><a href="#ALUOp" class="headerlink" title="ALUOp"></a>ALUOp</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> ALUOp = (add||addi||StWd||LdWd) ? <span class="number">4&#x27;b0000</span> :</span><br><span class="line">					(sub)  ?  <span class="number">4&#x27;b0001</span> :</span><br><span class="line">					(AND||andi)  ?  <span class="number">4&#x27;b0010</span> : </span><br><span class="line">					(OR||ori)   ?  <span class="number">4&#x27;b0011</span> : </span><br><span class="line">					(slt)  ?  <span class="number">4&#x27;b0100</span> : </span><br><span class="line">					(sltu) ?  <span class="number">4&#x27;b0101</span> : <span class="number">4&#x27;b1111</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="MDUOp"><a href="#MDUOp" class="headerlink" title="MDUOp"></a>MDUOp</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> MDUOp = (mult)  ? <span class="number">4&#x27;b0001</span> :</span><br><span class="line">					(multu) ? <span class="number">4&#x27;b0010</span> :</span><br><span class="line">					(div)   ? <span class="number">4&#x27;b0011</span> :</span><br><span class="line">					(divu)  ? <span class="number">4&#x27;b0100</span> :</span><br><span class="line">					(mfhi)  ? <span class="number">4&#x27;b0101</span> :</span><br><span class="line">					(mflo)  ? <span class="number">4&#x27;b0110</span> :</span><br><span class="line">					(mthi)  ? <span class="number">4&#x27;b0111</span> :</span><br><span class="line">					(mtlo)  ? <span class="number">4&#x27;b1000</span> : <span class="number">4&#x27;b0000</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="lwOp"><a href="#lwOp" class="headerlink" title="lwOp"></a>lwOp</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> lwOp = (lw) ? <span class="number">3&#x27;b000</span> :</span><br><span class="line">				  (lb) ? <span class="number">3&#x27;b010</span> :</span><br><span class="line">				  (lh) ? <span class="number">3&#x27;b100</span> : <span class="number">3&#x27;b111</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Byteen"><a href="#Byteen" class="headerlink" title="Byteen"></a>Byteen</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> MemType = (sw) ? <span class="number">4&#x27;b1111</span> :</span><br><span class="line">		(sh) ? (addr[<span class="number">1</span>] ? <span class="number">4&#x27;b1100</span> : <span class="number">4&#x27;b0011</span>) :</span><br><span class="line">		(sb) ? (<span class="number">4&#x27;b1</span> &lt;&lt; addr) : <span class="number">4&#x27;b0000</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="CMPOp"><a href="#CMPOp" class="headerlink" title="CMPOp"></a>CMPOp</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> CMPOp = (bne) ? <span class="number">3&#x27;b10</span> :</span><br><span class="line">				(beq) ? <span class="number">3&#x27;b01</span> : <span class="number">3&#x27;b00</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="NPC-sel"><a href="#NPC-sel" class="headerlink" title="NPC_sel"></a>NPC_sel</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> npc_sel = (beq||bne) ? <span class="number">3&#x27;b001</span> :</span><br><span class="line">				(jal||j) ? <span class="number">3&#x27;b010</span> :</span><br><span class="line">				(jr) ? <span class="number">3&#x27;b011</span> : <span class="number">3&#x27;b0</span>;	</span><br></pre></td></tr></table></figure>
+<h2 id="out-sel"><a href="#out-sel" class="headerlink" title="out_sel"></a>out_sel</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> outE_sel = (lui) ? <span class="number">2&#x27;b01</span> :</span><br><span class="line">				(jal) ? <span class="number">2&#x27;b10</span> : <span class="number">2&#x27;b00</span>;</span><br><span class="line"><span class="keyword">assign</span> outM_sel = (alu_type||alu_imm) ? <span class="number">2&#x27;b01</span> : </span><br><span class="line">				(mf) ? <span class="number">2&#x27;b10</span> : <span class="number">2&#x27;b00</span>;</span><br><span class="line"><span class="keyword">assign</span> outW_sel = (LdWd) ? <span class="number">2&#x27;b01</span> : <span class="number">2&#x27;b00</span>;	</span><br></pre></td></tr></table></figure>
+<h2 id="else"><a href="#else" class="headerlink" title="else"></a>else</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> RegDst = (alu_type) ? <span class="number">2&#x27;b01</span> :</span><br><span class="line">				 (jal) ? <span class="number">2&#x27;b10</span> : <span class="number">2&#x27;b00</span>;</span><br><span class="line"><span class="keyword">assign</span> ALUsrc = (alu_imm||LdWd||StWd);</span><br><span class="line"><span class="keyword">assign</span> RegWrite = (alu_type||alu_imm||lui||LdWd||jal||mf);</span><br><span class="line"><span class="keyword">assign</span> ExtOp = (lui) ? <span class="number">2&#x27;b10</span> :</span><br><span class="line">				(LdWd||StWd) ? <span class="number">2&#x27;b01</span> : <span class="number">2&#x27;b00</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="阻塞与转发"><a href="#阻塞与转发" class="headerlink" title="阻塞与转发"></a>阻塞与转发</h1><h2 id="Rs-Tuse"><a href="#Rs-Tuse" class="headerlink" title="Rs_Tuse"></a>Rs_Tuse</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> Rs_T_use = (alu_type||alu_imm||mdu||mt||LdWd||StWd) ? <span class="number">2&#x27;b01</span> :</span><br><span class="line">				(beq||bne||jr||lui) ? <span class="number">2&#x27;b00</span> : <span class="number">2&#x27;b11</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Rt-Tuse"><a href="#Rt-Tuse" class="headerlink" title="Rt_Tuse"></a>Rt_Tuse</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> Rt_T_use = (alu_type||mdu) ? <span class="number">2&#x27;b01</span> :</span><br><span class="line">			(StWd) ? <span class="number">2&#x27;b10</span> :</span><br><span class="line">			(beq||bne) ? <span class="number">2&#x27;b00</span> : <span class="number">2&#x27;b11</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Tnew-D"><a href="#Tnew-D" class="headerlink" title="Tnew_D"></a>Tnew_D</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> T_new = ((Status == <span class="number">2&#x27;b01</span> &amp;&amp; (alu_type||alu_imm||mf))||</span><br><span class="line">                (Status == <span class="number">2&#x27;b10</span> &amp;&amp; LdWd)) ? <span class="number">2&#x27;b01</span> :</span><br><span class="line">		(Status == <span class="number">2&#x27;b01</span> &amp;&amp; LdWd) ? <span class="number">2&#x27;b10</span> : <span class="number">2&#x27;b00</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="测试方案"><a href="#测试方案" class="headerlink" title="测试方案"></a>测试方案</h1><ol>
+<li>按分类逐条测试新增指令</li>
+<li>考虑阻塞和转发按情况测试指令<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><blockquote>
+<p>为什么需要有单独的乘除法部件而不是整合进ALU?为何需要有独立的HI,LO寄存器</p>
+</blockquote>
+</li>
+</ol>
+<p>乘除法部件的运算逻辑与读写数据都与ALU截然不同。</p>
+<ol>
+<li>乘除法具有高强度阻塞和特别的时序逻辑，不能和组合逻辑直接混用。</li>
+<li>HI，LO寄存器只有MDU能用到，和ALU混用，内部耦合度提高，会变得混乱</li>
+</ol>
+<p>把HI，LO放在E区，与其他寄存器分离开来，能够实现即出即写，避免了读写冲突。 </p>
+<blockquote>
+<p>真实的流水线CPU是如何实现乘除法的？</p>
+</blockquote>
+<p>在真实的流水线CPU中，32位乘法是分部分计算的，一个周期可以32位对8位数的乘法，4个周期算完。<br>除法用试商法，一次试4位，8个周期做完除法。</p>
+<blockquote>
+<p>请结合自己的实现分析，你是如何处理BUsy信号带来的周期阻塞的？</p>
+</blockquote>
+<p>start引发busy，start和busy都能导致阻塞。<br>通过计数器控制阻塞周期数，在最后一周期，清空busy,cnt，并完成寄存器赋值。</p>
+<blockquote>
+<p>请问采用字节使能信号的方式处理写指令有什么好处？</p>
+</blockquote>
+<p>清晰性：<br>清晰地表达了究竟要写哪些字节，对每个字节执行独立的赋值。</p>
+<p>统一性：<br>sw,sh,sb都能用同样的按字节赋值的逻辑来执行。</p>
+<blockquote>
+<p>请思考，我们在按字节读和按字节写时，实际从DM获得数据和向DM写入的数据是否是一字节？在什么情况下我们按字节读和按自己写的效率会高于按字节读和写？</p>
+</blockquote>
+<p>写入DM的确实只写了一个字节，但从DM获取的是一整个字，要经过后续处理。</p>
+<p>执行lw和sw时按字读写更快，但是执行对半字与字节的操作时，按字节读写效率更高。</p>
+<blockquote>
+<p>为u了对抗复杂性你采取了哪些抽象和规范手段？这些手段在译码和处理数据冲突时有什么样的特点与帮助？</p>
+</blockquote>
+<p>抽象：<br>对指令进行了归类，并按类地添加和处理指令。<br>规范：<br>对于同一类指令，统一为控制信号赋值。<br>帮助：<br>在译码和处理数据冲突的时候，按类调整控制信号与T信号，更加方便。</p>
+<blockquote>
+<p>在本实验中你遇到了哪些不同指令类型组合产生的冲突，你又是如何解决的?相应的测试样例是什么样的?</p>
+</blockquote>
+<p>新的冲突只有数据冒险。<br>阻塞：<br>在HAzard译码时为各个指令赋好了Tuse_rs,Tuse_rt,Tnew，阻塞正常进行。<br>转发：<br>需求者没有改变。<br>供给者M级有来自MDU的新数据。<br><figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mult </span>$<span class="built_in">s1</span>, $<span class="built_in">s2</span></span><br><span class="line"><span class="keyword">mfhi </span>$<span class="built_in">t0</span>            <span class="comment">## 写$t0</span></span><br><span class="line"><span class="keyword">add </span>$<span class="built_in">t1</span>, $<span class="built_in">t0</span>, $<span class="built_in">t0</span>   <span class="comment">## 读$t0，M-&gt;E需转发，写$t1</span></span><br><span class="line"><span class="keyword">mtlo </span>$<span class="built_in">t1</span>            <span class="comment">## 读$t1，M-&gt;E需转发</span></span><br><span class="line"><span class="keyword">mflo </span>$<span class="built_in">t2</span>            <span class="comment">## 写$t2</span></span><br><span class="line"><span class="keyword">add </span>$<span class="built_in">t3</span> $<span class="built_in">t2</span> $<span class="built_in">t2</span>     <span class="comment">## 读$t2，M-&gt;E需转发，写$t3</span></span><br><span class="line"><span class="keyword">mthi </span>$<span class="built_in">t3</span>            <span class="comment">## 读$t3，M-&gt;E需转发</span></span><br><span class="line"><span class="keyword">mfhi </span>$<span class="built_in">t4</span>            <span class="comment">## 写$t4</span></span><br><span class="line"><span class="keyword">sw </span>$<span class="built_in">t4</span> <span class="number">0</span>($<span class="number">0</span>)        <span class="comment">## 读$t4，M-&gt;E需转发</span></span><br><span class="line"><span class="keyword">lw </span>$<span class="built_in">t5</span> <span class="number">0</span>($<span class="number">0</span>)        <span class="comment">## 写$t5</span></span><br><span class="line"><span class="keyword">mtlo </span>$<span class="built_in">t5</span>            <span class="comment">## 读$t5</span></span><br><span class="line"><span class="keyword">mflo </span>$<span class="built_in">t6</span>            <span class="comment">## 写$t6</span></span><br><span class="line"><span class="symbol">label:</span></span><br><span class="line"><span class="keyword">or </span>$<span class="built_in">t6</span> $<span class="built_in">t6</span> $<span class="number">0</span>       <span class="comment">## 表示正在死循环</span></span><br><span class="line"><span class="keyword">bne </span>$<span class="number">0</span> $<span class="built_in">t6</span> label    <span class="comment">## M-&gt;D转发</span></span><br><span class="line"><span class="keyword">nop</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如果你是手动构造的样例，请说明构造策略，说明你的测试程序如何保证覆盖了所有需要测试的情况；如果你是完全随机生成的测试样例，请思考完全随机的测试程序有何不足之处；如果你在生成测试样例时采用了特殊的策略，比如构造连续数据冒险序列，请你描述一下你使用的策略如何结合了随机性达到强测的效果。</p>
+</blockquote>
+<p>我采用了手动构造法。<br>通过建立策略矩阵，按照T的关系来进行构造。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://ranyechai.site">Caxirye</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://ranyechai.site/2025/11/24/P6-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/">http://ranyechai.site/2025/11/24/P6-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://ranyechai.site" target="_blank">PlutoC</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CO/">CO</a><a class="post-meta__tags" href="/tags/codeing/">codeing</a></div><div class="post-share"><div class="social-share" data-image="/images/COclassCover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/11/17/P5-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P5-CPU-设计文档"><img class="cover" src="/images/COclassCover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">P5-CPU-设计文档</div></div><div class="info-2"><div class="info-item-1">躺平的一周~</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/12/P0%E6%80%BB%E7%BB%93/" title="P0总结"><img class="cover" src="/images/COclassCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-12</div><div class="info-item-2">P0总结</div></div><div class="info-2"><div class="info-item-1">课下感觉就是无脑组合逻辑+pre进阶</div></div></div></a><a class="pagination-related" href="/2025/10/19/P1%E6%80%BB%E7%BB%93/" title="P1总结"><img class="cover" src="/images/COclassCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-19</div><div class="info-item-2">P1总结</div></div><div class="info-2"><div class="info-item-1">课下感觉还是很简单的,除了附加题卡了我一个神奇的地方~</div></div></div></a><a class="pagination-related" href="/2025/10/27/P2%E6%80%BB%E7%BB%93/" title="P2总结"><img class="cover" src="/images/COclassCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-27</div><div class="info-item-2">P2总结</div></div><div class="info-2"><div class="info-item-1">宏真是一个好东西hh</div></div></div></a><a class="pagination-related" href="/2025/11/11/P4-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P4-CPU-设计文档"><img class="cover" src="/images/COclassCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-11</div><div class="info-item-2">P4-CPU-设计文档</div></div><div class="info-2"><div class="info-item-1">数学竞赛🫠</div></div></div></a><a class="pagination-related" href="/2025/11/17/P5-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P5-CPU-设计文档"><img class="cover" src="/images/COclassCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-17</div><div class="info-item-2">P5-CPU-设计文档</div></div><div class="info-2"><div class="info-item-1">躺平的一周~</div></div></div></a><a class="pagination-related" href="/2025/09/30/Pre%E4%B8%8A%E6%9C%BA%E6%80%BB%E7%BB%93/" title="Pre上机总结"><img class="cover" src="/images/COclassCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-30</div><div class="info-item-2">Pre上机总结</div></div><div class="info-2"><div class="info-item-1">只过了前两个题，惨痛啊，虽然不计分，但没过就是没过，MIPS我喜欢你(bushi)</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Caxirye</div><div class="author-info-description">just explore</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ranye-chai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Ranye-chai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">指令集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">分类:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#alu-type-add-sub-and-or-slt-sltu"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">alu_type:add,sub,and,or,slt,sltu</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#alu-imm-addi-andi-ori"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">alu_imm:addi,andi,ori</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mdu-mult-multu-div-divu"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">mdu:mult,multu,div,divu</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mf-mfhi-mflo"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">mf:mfhi,mflo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mt-mthi-mtlo"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">mt:mthi,mtlo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LdWd-lw-lb-lh"><span class="toc-number">1.1.0.6.</span> <span class="toc-text">LdWd:lw,lb,lh</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StWd-sw-sb-sh"><span class="toc-number">1.1.0.7.</span> <span class="toc-text">StWd:sw,sb,sh</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#branch-beq-bne"><span class="toc-number">1.1.0.8.</span> <span class="toc-text">branch:beq,bne</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#special-lui"><span class="toc-number">1.1.0.9.</span> <span class="toc-text">special:lui</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jump-j-jal-jr"><span class="toc-number">1.1.0.10.</span> <span class="toc-text">jump:j,jal,jr</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E6%A8%A1%E5%9D%97"><span class="toc-number">2.</span> <span class="toc-text">新增模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MDU"><span class="toc-number">2.1.</span> <span class="toc-text">MDU</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lwEXT"><span class="toc-number">2.2.</span> <span class="toc-text">lwEXT</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E4%BF%A1%E5%8F%B7"><span class="toc-number">3.</span> <span class="toc-text">控制信号</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ALUOp"><span class="toc-number">3.1.</span> <span class="toc-text">ALUOp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MDUOp"><span class="toc-number">3.2.</span> <span class="toc-text">MDUOp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lwOp"><span class="toc-number">3.3.</span> <span class="toc-text">lwOp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Byteen"><span class="toc-number">3.4.</span> <span class="toc-text">Byteen</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CMPOp"><span class="toc-number">3.5.</span> <span class="toc-text">CMPOp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NPC-sel"><span class="toc-number">3.6.</span> <span class="toc-text">NPC_sel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#out-sel"><span class="toc-number">3.7.</span> <span class="toc-text">out_sel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#else"><span class="toc-number">3.8.</span> <span class="toc-text">else</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%98%BB%E5%A1%9E%E4%B8%8E%E8%BD%AC%E5%8F%91"><span class="toc-number">4.</span> <span class="toc-text">阻塞与转发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Rs-Tuse"><span class="toc-number">4.1.</span> <span class="toc-text">Rs_Tuse</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rt-Tuse"><span class="toc-number">4.2.</span> <span class="toc-text">Rt_Tuse</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tnew-D"><span class="toc-number">4.3.</span> <span class="toc-text">Tnew_D</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88"><span class="toc-number">5.</span> <span class="toc-text">测试方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">思考题</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/11/24/P6-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P6-CPU-设计文档"><img src="/images/COclassCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="P6-CPU-设计文档"/></a><div class="content"><a class="title" href="/2025/11/24/P6-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P6-CPU-设计文档">P6-CPU-设计文档</a><time datetime="2025-11-24T02:59:21.000Z" title="发表于 2025-11-24 10:59:21">2025-11-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/17/P5-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P5-CPU-设计文档"><img src="/images/COclassCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="P5-CPU-设计文档"/></a><div class="content"><a class="title" href="/2025/11/17/P5-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P5-CPU-设计文档">P5-CPU-设计文档</a><time datetime="2025-11-17T04:05:50.000Z" title="发表于 2025-11-17 12:05:50">2025-11-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/11/P4-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P4-CPU-设计文档"><img src="/images/COclassCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="P4-CPU-设计文档"/></a><div class="content"><a class="title" href="/2025/11/11/P4-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P4-CPU-设计文档">P4-CPU-设计文档</a><time datetime="2025-11-11T02:10:34.000Z" title="发表于 2025-11-11 10:10:34">2025-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/04/OOpre%E6%80%BB%E7%BB%93/" title="OOpre总结"><img src="/images/OOpreWork.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OOpre总结"/></a><div class="content"><a class="title" href="/2025/11/04/OOpre%E6%80%BB%E7%BB%93/" title="OOpre总结">OOpre总结</a><time datetime="2025-11-04T15:45:22.000Z" title="发表于 2025-11-04 23:45:22">2025-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/29/P3-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P3-CPU-设计文档"><img src="/images/COclassCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="P3-CPU-设计文档"/></a><div class="content"><a class="title" href="/2025/10/29/P3-CPU-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" title="P3-CPU-设计文档">P3-CPU-设计文档</a><time datetime="2025-10-29T05:52:41.000Z" title="发表于 2025-10-29 13:52:41">2025-10-29</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/top.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Caxirye</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
