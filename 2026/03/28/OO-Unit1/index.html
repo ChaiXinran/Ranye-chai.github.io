@@ -1,0 +1,387 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>OO-Unit2 | PlutoC</title><meta name="author" content="Caxirye"><meta name="copyright" content="Caxirye"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="OOUnit1，表达式化简展开，代码量还是比较大的~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OO-Unit2">
+<meta property="og:url" content="http://ranyechai.site/2026/03/28/OO-Unit1/index.html">
+<meta property="og:site_name" content="PlutoC">
+<meta property="og:description" content="OOUnit1，表达式化简展开，代码量还是比较大的~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ranyechai.site/images/OOpreWork.jpg">
+<meta property="article:published_time" content="2026-03-28T13:40:29.000Z">
+<meta property="article:modified_time" content="2026-05-28T09:42:00.230Z">
+<meta property="article:author" content="Caxirye">
+<meta property="article:tag" content="OO">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="递归下降">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ranyechai.site/images/OOpreWork.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OO-Unit2",
+  "url": "http://ranyechai.site/2026/03/28/OO-Unit1/",
+  "image": "http://ranyechai.site/images/OOpreWork.jpg",
+  "datePublished": "2026-03-28T13:40:29.000Z",
+  "dateModified": "2026-05-28T09:42:00.230Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Caxirye",
+      "url": "http://ranyechai.site"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/plutoc-favicon.ico"><link rel="canonical" href="http://ranyechai.site/2026/03/28/OO-Unit1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'OO-Unit2',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/back.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/OOpreWork.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">PlutoC</span></a><a class="nav-page-title" href="/"><span class="site-name">OO-Unit2</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">OO-Unit2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-03-28T13:40:29.000Z" title="发表于 2026-03-28 21:40:29">2026-03-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-28T09:42:00.230Z" title="更新于 2026-05-28 17:42:00">2026-05-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OO/">OO</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OO/homework/">homework</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="OO-Unit1-Blog"><a href="#OO-Unit1-Blog" class="headerlink" title="OO-Unit1-Blog"></a>OO-Unit1-Blog</h1><h2 id="分析程序结构"><a href="#分析程序结构" class="headerlink" title="分析程序结构"></a>分析程序结构</h2><h3 id="度量"><a href="#度量" class="headerlink" title="度量"></a>度量</h3><p><img src="all.png" alt="all"><br>整体设计结构正常、略有复杂度偏高(集中在<code>Poly</code>)，但耦合控制得不错，内聚基本良好。</p>
+<h3 id="hw1"><a href="#hw1" class="headerlink" title="hw1"></a>hw1</h3><ol>
+<li>输入部分：<code>processor</code>预处理多余符号和空格。</li>
+<li>解析部分：<code>TokenType</code>存储<code>Token</code>类别，<code>Lexer</code>词法分析，<code>Parser</code>语法分析。</li>
+<li>递归下降部分：<code>Expr</code>表达式，<code>Term</code>项，<code>Factor</code>因子(接口)，<code>VarFactor</code>变量因子，<code>NumFactor</code>带符号整数因子，<code>PowerFactor</code>幂函数因子。</li>
+<li>基本单元与输出部分：<code>Mono</code>最基本单元，<code>Poly</code>计算形式。 </li>
+<li><p>优点：结构清晰，逻辑简单；缺点：有一些冗余重复的类,诸如<code>exprFactor</code>和<code>expr</code>等等。<br><img src="unit1_hw1.drawio.png" alt="hw1"><br><img src="hw1.png" alt="hw1"></p>
+<h3 id="hw2"><a href="#hw2" class="headerlink" title="hw2"></a>hw2</h3></li>
+<li><p>输入部分：新增<code>InputHandler</code>，处理复杂输入与<strong>函数替换</strong>。</p>
+</li>
+<li>解析部分：四个类都作了相应的更新。</li>
+<li>递归下降部分：新增<code>SelectFactor</code>选择式因子，<code>ExpFactor</code>指数函数因子。</li>
+<li>基本单元与输出部分：<code>Mono</code>最基本单元更新，<code>Poly</code>计算形式更新。 </li>
+<li>优点：输入输出单独处理，易于定位问题；缺点：<code>Poly</code>类承担了大部分解析处理，复杂度偏高。<br><img src="unit1_hw2.drawio.png" alt="hw2"><br><img src="hw2.png" alt="hw2"></li>
+</ol>
+<h3 id="hw3"><a href="#hw3" class="headerlink" title="hw3"></a>hw3</h3><ol>
+<li>输入部分：<code>InputHandler</code>新增处理<strong>递推函数</strong>。</li>
+<li>解析部分：四个类都作了相应的更新。</li>
+<li>递归下降部分：新增<code>FuncFactor</code>函数因子，<code>DefFactor</code>求导因子。</li>
+<li>基本单元与输出部分：<code>Mono</code>最基本单元更新，<code>Poly</code>计算形式更新,增加<strong>求导运算</strong>。</li>
+<li>优点：流程完整清晰，易于理解；缺点：类的复杂度分布不均衡。<br><img src="unit1_hw3.drawio.png" alt="hw3"><br><img src="hw3.png" alt="hw3"><h2 id="架构设计体验"><a href="#架构设计体验" class="headerlink" title="架构设计体验"></a>架构设计体验</h2><h3 id="hw1-1"><a href="#hw1-1" class="headerlink" title="hw1"></a>hw1</h3><code>Processor</code>预处理-&gt;<code>expr</code>解析为<code>Poly</code>-&gt;<code>toString</code>输出。<br>运算过程都放在<code>Poly</code>类里了。<br><code>Poly</code>的存储形式为<code>&lt;key,value&gt;</code>,<code>key</code>为<code>expX</code>,<code>value</code>为<code>coe</code>。<h3 id="hw1-gt-hw2"><a href="#hw1-gt-hw2" class="headerlink" title="hw1-&gt;hw2"></a>hw1-&gt;hw2</h3>新增<code>InputHandler</code>,<code>SelFactor</code>,<code>ExpFactor</code>。<br><code>Mono</code>存储的一般形式更新为<code>a*x^b*exp(Poly)</code>。</li>
+</ol>
+<h3 id="hw2-gt-hw3"><a href="#hw2-gt-hw3" class="headerlink" title="hw2-&gt;hw3"></a>hw2-&gt;hw3</h3><p><code>Mono</code>类新增元素<code>expY</code>。<br><code>Poly</code>类新增求导方法。<br>新增<code>derFactor</code>类。<br>新增<code>OutputHandler</code>类，处理输出与优化。<br>整体延续将表达式全部处理为<code>Poly</code>再化简运算的模式。</p>
+<h3 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h3><p>hw2采取预处理的框架，会把<code>f(x)</code>采取字符串替换的方式直接处理成表达式，这样<code>parser</code>就不需要大改，对hw1的改动也小，偷了很多懒。<br>但是就会出现这样一个问题：<br>像下面这个数据点：<code>fatorC</code>显然是超<code>cost</code>的,如果预处理的话一定会处理<code>factorC</code>,这样就会爆内存；如果是在<code>parser</code>之后再处理<code>FuncFactor</code>，就会只处理<code>FactorD</code>，不存在爆内存的问题。<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line"><span class="built_in">f</span>(x)=x+2*x^2+3*x^3+4*x^4+8*x^8*<span class="built_in">exp</span>(x)</span><br><span class="line">[(x==1)?<span class="built_in">f</span>(<span class="built_in">f</span>(<span class="built_in">f</span>(<span class="built_in">f</span>(<span class="built_in">f</span>(<span class="built_in">f</span>(<span class="built_in">f</span>(<span class="built_in">f</span>(<span class="built_in">f</span>(x))))))))):<span class="built_in">f</span>((x+1))]</span><br></pre></td></tr></table></figure><br>这时候为了解决这个问题，有两种方式。</p>
+<ul>
+<li>一种是强化预处理，把<code>SelFactor</code>也放在<code>Processor</code>里，先选择再函数替换。但作业要求，函数定义里不能有选择表达式，选择表达式里可以有函数。那只能先处理选择表达式，如果判断条件里有函数，就再先处理函数。这样<code>Processor</code>部分就会很臃肿且改起来也很难受。</li>
+<li>一种是重构，在<code>parser</code>之后再处理<code>FuncFactor</code>。这样就需要大改程序架构，并且会出现另外一个TLE问题，这种多嵌套处理解析会相比字符串预处理替换慢很多，并且由于<code>exp()</code>优化比较的存在，时间复杂度大大提高，这个问题也不好解决。<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">f</span><span class="params">(x)</span></span>=<span class="built_in">exp</span>(<span class="built_in">exp</span>(<span class="built_in">exp</span>(<span class="built_in">exp</span>(<span class="built_in">exp</span>(<span class="built_in">exp</span>(<span class="attribute">x</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span></span><br><span class="line"><span class="function"><span class="title">f</span><span class="params">(f(f(f(x)</span></span>)))</span><br></pre></td></tr></table></figure>
+最后艰难选择了重构框架，用类似于cache的方式解决TLE的问题。<br>其实也可以采取类似于模式判断的方式。<h3 id="新迭代设计"><a href="#新迭代设计" class="headerlink" title="新迭代设计"></a>新迭代设计</h3>新增变量<code>z</code>。<br>新增多变量函数<code>f(x,y)</code>。</li>
+</ul>
+<h2 id="程序bug"><a href="#程序bug" class="headerlink" title="程序bug"></a>程序bug</h2><h3 id="第一次作业"><a href="#第一次作业" class="headerlink" title="第一次作业"></a>第一次作业</h3><ul>
+<li>公测：<ul>
+<li>bug说明：无法处理<code>*</code>后带有<code>+/-</code>的情况。</li>
+<li>逻辑原因：因为程序的<code>parser</code>机制默认<code>*</code>后是一个不带符号的因子。<code>Processor</code>预处理不完善带来的弊病。</li>
+<li>处理：在预处理中加了一条专门处理替换<code>*</code>后<code>+/-</code>的代码。</li>
+</ul>
+</li>
+<li>强测：<ul>
+<li>错误数据点：<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">0013</span>*( +<span class="number">02</span>* -<span class="number">0010</span> -<span class="number">0017</span>* x+ -x^ <span class="number">00</span> *x ^<span class="number">02</span>)* x+-(-+x*x* <span class="number">002</span>+- -<span class="number">7</span> *x^+<span class="number">06</span>*<span class="number">0016</span>+x*<span class="number">17</span>)^<span class="number">06</span>* (+ x*x-x^+<span class="number">4</span> *+<span class="number">0018</span> -x^ <span class="number">04</span> *x^+<span class="number">007</span>*x^ <span class="number">07</span>)^+<span class="number">08</span>*( x *<span class="number">2</span>*<span class="number">08</span>+x^+<span class="number">5</span>*<span class="number">008</span>*+<span class="number">1</span>) +-(-+ x^+<span class="number">002</span>*x^+<span class="number">08</span> * x^ <span class="number">007</span> + <span class="number">015</span>*x^<span class="number">1</span>*-<span class="number">015</span>) ^<span class="number">006</span>*(++<span class="number">0018</span> *<span class="number">04</span> +x*x^+<span class="number">005</span>* x)</span><br></pre></td></tr></table></figure></li>
+<li>bug说明:无法处理<code>(</code>后有连续<code>+</code>或者<code>-</code>的情况</li>
+<li>逻辑原因:第一次作业采取预处理的架构，先处理掉第一个因子/项/表达式最开头的<code>+</code>，将<code>-</code>替换为<code>0-</code>，再循环处理掉连续的正负号，这样<code>(+-</code>会被处理为<code>(-</code>,而parser时默认<code>(</code>后是一个没有正负号的因子，因此程序崩溃。</li>
+</ul>
+</li>
+<li>互测：被hack9次，与强测发现的问题相同。</li>
+<li>处理：改变符号处理机制，让<code>parser</code>支持<strong>带符号整数的解析</strong>，彻底解决所有和符号有关的问题。</li>
+</ul>
+<h3 id="第二次作业"><a href="#第二次作业" class="headerlink" title="第二次作业"></a>第二次作业</h3><ul>
+<li>公测：无bug</li>
+<li>强测：无bug</li>
+<li>互测：被hack2次,同质bug<ul>
+<li>错误数据点:<figure class="highlight parser3"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">(</span><span class="number">0</span><span class="language-xml">)</span><span class="keyword">^0</span></span><br></pre></td></tr></table></figure></li>
+<li>bug说明：无法处理<code>()^0</code>的形式</li>
+<li>逻辑原因：在<code>powPoly()</code>的条件判断<code>exprExp</code>时<code>if-else</code>没有处理 <code>exprExp == 0</code>情况。</li>
+<li>处理：加上条件判断即可。</li>
+</ul>
+</li>
+</ul>
+<h3 id="第三次作业"><a href="#第三次作业" class="headerlink" title="第三次作业"></a>第三次作业</h3><ul>
+<li>公测：<ul>
+<li>bug说明：<code>exp((x*y))</code>输出为<code>exp(xy)</code>格式不对。</li>
+<li>逻辑原因：<code>OutputHandler</code>在迭代时没有特别处理<code>Mono</code>中<code>expX==1&amp;&amp;expY==1</code>的情况。</li>
+</ul>
+</li>
+<li>强测：无bug</li>
+<li>互测：性能测试<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">f</span>(<span class="variable">x</span>)=<span class="title">exp</span>(<span class="number">1</span>)</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="function"><span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="variable">x</span>))))))))))))))))))))))))))))))</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">f</span>(<span class="variable">x</span>) = <span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="variable">x</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span></span></span><br><span class="line"><span class="function"><span class="number">0</span></span></span><br><span class="line"><span class="function"><span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">exp</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="title">f</span>(<span class="variable">x</span>)))))^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span>)^<span class="number">2</span></span></span><br></pre></td></tr></table></figure></li>
+<li>采取cached的方式，存储<code>Mono</code>对应的<code>String</code>,如果有直接调用，如果没有就生成。<ul>
+<li>在Mono里新加一个<code>String</code>类型参数<code>cached</code></li>
+<li>修改一下<code>eachToString</code>，由原来的直接输出键值对，新建<code>StringBuilder temp</code>存储<code>key(mono)</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><ol>
+<li>出现了bug的方法集中在<code>Poly</code>类和<code>OutputHandler</code>类,相应方法的复杂度都极高,行数一般在几十行，明显比未出现bug的方法行数更多也更复杂。</li>
+<li>可以通过分层递归下降的方式来降低方法的复杂度。比如求导时可以参照exp2的方式分层求导解析，而不是都塞在<code>poly</code>类。</li>
+</ol>
+<h2 id="hack策略"><a href="#hack策略" class="headerlink" title="hack策略"></a>hack策略</h2><ol>
+<li>普遍问题<ul>
+<li>测试自己的程序时积累了10-20个复杂案例，包括一些普遍易错性问题，用这些案例测试，简化数据点再精准定位。</li>
+<li>有效性：hw2中相当成功，发现5个人的bug。</li>
+</ul>
+</li>
+<li>针对性问题<ul>
+<li>让ai阅读互测代码，发现逻辑漏洞。</li>
+<li>有效性：hw1可以有效定位，后面太麻烦了。</li>
+</ul>
+</li>
+<li>功能性问题<ul>
+<li>巧思类和性能类的极限测试。</li>
+<li>有效性：hw2和hw3基本可以击溃所有没有特意解决这个问题或者架构本身原因导致bug的程序。</li>
+</ul>
+</li>
+<li>延续性问题<ul>
+<li>已知前面作业hack成功的测试点。</li>
+<li>有效性：hw3延续hw2的数据点，有的数据点可以hack中5个人，有的不再有效。</li>
+</ul>
+</li>
+</ol>
+<h2 id="优化处理"><a href="#优化处理" class="headerlink" title="优化处理"></a>优化处理</h2><p>本单元的作业性能衡量标准只有<strong>最终展开结果的输出长度</strong>。所以我的所有优化处理都在<code>OutputHanlder</code>中,可以保证代码的简洁性与正确性。</p>
+<ol>
+<li>基于Mono的普遍性输出，输出<code>a*x^b*y^c*exp(factor)^d</code></li>
+<li>简单优化：<ul>
+<li><code>a==1 || a==-1</code>时省略<code>a*</code></li>
+<li><code>b==1</code>时省略<code>^b</code></li>
+<li><code>b==0</code>时省略<code>*x^b</code></li>
+<li><code>c==1</code>时省略<code>^c</code></li>
+<li><code>c==0</code>时省略<code>*y^c</code></li>
+<li><code>exp()</code>里是非<code>exprFactor</code>时,不需要额外<code>()</code><blockquote>
+<p>这一点的判断很容易出问题。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>特殊优化：优先输出<code>+</code>项。</li>
+<li>提取：<code>exp((2*x))-&gt;exp(x)^2</code></li>
+<li>分离：<code>exp((122345*x+122345*y+122347))-&gt;exp((x+y+1))^122345*exp(2)</code></li>
+</ol>
+<blockquote>
+<ul>
+<li>第4点优化，采取比较提出最小公倍数和不提取的长度，再选择较短的输出的方法，容易被多重嵌套循环的数据点hack出性能问题。</li>
+<li>第4点优化进一步，比较提取出哪一个公因数使得长度最短。<code>exp((3000*x+1000))-&gt;exp((3*x+1))^1000-&gt;exp((6*x+2))^500</code>，因为遍历寻找最合适的公因数的比较次数过多，更容易被hack了，所以也没有做。</li>
+<li>第5点优化，太过复杂没有做。</li>
+</ul>
+</blockquote>
+<h2 id="大模型相关使用"><a href="#大模型相关使用" class="headerlink" title="大模型相关使用"></a>大模型相关使用</h2><h3 id="作业代码生成"><a href="#作业代码生成" class="headerlink" title="作业代码生成"></a>作业代码生成</h3><p>正确性：只在一小部分涉及到语法知识的时候，比如如何利用正则表达式替换字符方面使用了大模型。</p>
+<h3 id="辅助找-bug"><a href="#辅助找-bug" class="headerlink" title="辅助找 bug"></a>辅助找 bug</h3><p>使用大模型静态分析代码的逻辑bug。<br>成功找出自己hw2和hw3分别的1个bug。<br>互测时使用大模型分析别人的代码不太成功。</p>
+<h3 id="评测机搭建"><a href="#评测机搭建" class="headerlink" title="评测机搭建"></a>评测机搭建</h3><p>hw2的<code>DataMaker.py</code>相当出色，基本测出了所有问题，但是忽略了一些简单的边界情形。<br>hw3注重测试代码的复杂度和性能，大模型的评测机在这一类数据点的生成方面不太行，很容易就超cost，使生成数据不合法。</p>
+<h2 id="心得体会"><a href="#心得体会" class="headerlink" title="心得体会"></a>心得体会</h2><ul>
+<li>印象最深的是hw2到hw3的迭代过程。是否重构以及如何重构处理函数，这个问题真的困扰了我很久，花了很久考虑清楚如何改架构以及各个改动的有益处和弊病，这个思考和选择过程真的很难忘，也让我对架构设计和面向对象有了更深的认识。</li>
+<li>如果说hw1还在懵懂探索没进入状态，那么hw2就熟练很多了，hw3就苦于如何提高性能和降低复杂度。</li>
+<li>另外除了第一次在c房，其它两次我互测的成功率真的很低，完全没有耐心研究别人的代码(叹气)，还是得学着弄一个相当完善的评测机。</li>
+</ul>
+<h2 id="未来方向"><a href="#未来方向" class="headerlink" title="未来方向"></a>未来方向</h2><p>对于复杂度这一块，一直迷迷糊糊的，如果能有对各种架构和优化的复杂度讲解就更好了。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://ranyechai.site">Caxirye</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://ranyechai.site/2026/03/28/OO-Unit1/">http://ranyechai.site/2026/03/28/OO-Unit1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://ranyechai.site" target="_blank">PlutoC</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OO/">OO</a><a class="post-meta__tags" href="/tags/java/">java</a><a class="post-meta__tags" href="/tags/%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D/">递归下降</a></div><div class="post-share"><div class="social-share" data-image="/images/OOpreWork.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/04/01/OS-Lab1/" title="OS-Lab1"><img class="cover" src="/images/OSCover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">OS-Lab1</div></div><div class="info-2"><div class="info-item-1">顺利上机~</div></div></div></a><a class="pagination-related" href="/2026/03/04/Linux-Tool/" title="Linux_Tool"><img class="cover" src="/images/OOpreWork.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Linux_Tool</div></div><div class="info-2"><div class="info-item-1">假期预习~你看看是假期吗</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/04/25/OO-Unit2/" title="OO-Unit2"><img class="cover" src="/images/OOpreWork.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-25</div><div class="info-item-2">OO-Unit2</div></div><div class="info-2"><div class="info-item-1">OOUnit2，太恐怖了多线程</div></div></div></a><a class="pagination-related" href="/2026/05/28/OO-Unit3/" title="OO-Unit3"><img class="cover" src="/images/OOpreWork.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-28</div><div class="info-item-2">OO-Unit3</div></div><div class="info-2"><div class="info-item-1">OOUnit3，还是蛮简单的，善用LLM</div></div></div></a><a class="pagination-related" href="/2025/09/20/Git-Reset/" title="Git_Reset"><img class="cover" src="/images/GitCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-20</div><div class="info-item-2">Git_Reset</div></div><div class="info-2"><div class="info-item-1">Git重置揭秘！</div></div></div></a><a class="pagination-related" href="/2025/09/20/Git-BasicUsage/" title="Git_BasicUsage"><img class="cover" src="/images/GitCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-20</div><div class="info-item-2">Git_BasicUsage</div></div><div class="info-2"><div class="info-item-1">解读助教在第二次OOpre作业中给出的命令行指引~</div></div></div></a><a class="pagination-related" href="/2025/09/20/Git-Instruction/" title="Git_Instruction"><img class="cover" src="/images/GitCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-20</div><div class="info-item-2">Git_Instruction</div></div><div class="info-2"><div class="info-item-1">这里是一篇有关git的基本指令的文章~</div></div></div></a><a class="pagination-related" href="/2025/10/12/gitTIPS/" title="gitTIPS"><img class="cover" src="/images/GitCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-12</div><div class="info-item-2">gitTIPS</div></div><div class="info-2"><div class="info-item-1">自己提交的过程中遇到的一些问题的解决方法</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Caxirye</div><div class="author-info-description">just explore</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ranye-chai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Ranye-chai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OO-Unit1-Blog"><span class="toc-number">1.</span> <span class="toc-text">OO-Unit1-Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">分析程序结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">度量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw1"><span class="toc-number">1.1.2.</span> <span class="toc-text">hw1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw2"><span class="toc-number">1.1.3.</span> <span class="toc-text">hw2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw3"><span class="toc-number">1.1.4.</span> <span class="toc-text">hw3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%BD%93%E9%AA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">架构设计体验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hw1-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">hw1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw1-gt-hw2"><span class="toc-number">1.2.2.</span> <span class="toc-text">hw1-&gt;hw2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw2-gt-hw3"><span class="toc-number">1.2.3.</span> <span class="toc-text">hw2-&gt;hw3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E6%9E%84"><span class="toc-number">1.2.4.</span> <span class="toc-text">重构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E8%BF%AD%E4%BB%A3%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.5.</span> <span class="toc-text">新迭代设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8Fbug"><span class="toc-number">1.3.</span> <span class="toc-text">程序bug</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A"><span class="toc-number">1.3.1.</span> <span class="toc-text">第一次作业</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BD%9C%E4%B8%9A"><span class="toc-number">1.3.2.</span> <span class="toc-text">第二次作业</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A"><span class="toc-number">1.3.3.</span> <span class="toc-text">第三次作业</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94"><span class="toc-number">1.3.4.</span> <span class="toc-text">对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hack%E7%AD%96%E7%95%A5"><span class="toc-number">1.4.</span> <span class="toc-text">hack策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%A4%84%E7%90%86"><span class="toc-number">1.5.</span> <span class="toc-text">优化处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9B%B8%E5%85%B3%E4%BD%BF%E7%94%A8"><span class="toc-number">1.6.</span> <span class="toc-text">大模型相关使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90"><span class="toc-number">1.6.1.</span> <span class="toc-text">作业代码生成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%85%E5%8A%A9%E6%89%BE-bug"><span class="toc-number">1.6.2.</span> <span class="toc-text">辅助找 bug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E6%B5%8B%E6%9C%BA%E6%90%AD%E5%BB%BA"><span class="toc-number">1.6.3.</span> <span class="toc-text">评测机搭建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A"><span class="toc-number">1.7.</span> <span class="toc-text">心得体会</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E6%96%B9%E5%90%91"><span class="toc-number">1.8.</span> <span class="toc-text">未来方向</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/05/28/OO-Unit3/" title="OO-Unit3"><img src="/images/OOpreWork.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OO-Unit3"/></a><div class="content"><a class="title" href="/2026/05/28/OO-Unit3/" title="OO-Unit3">OO-Unit3</a><time datetime="2026-05-28T09:33:35.000Z" title="发表于 2026-05-28 17:33:35">2026-05-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/05/28/OS-Lab0/" title="OS-Lab0"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab0"/></a><div class="content"><a class="title" href="/2026/05/28/OS-Lab0/" title="OS-Lab0">OS-Lab0</a><time datetime="2026-05-28T09:32:44.000Z" title="发表于 2026-05-28 17:32:44">2026-05-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/05/27/OS-Lab5/" title="OS-Lab5"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab5"/></a><div class="content"><a class="title" href="/2026/05/27/OS-Lab5/" title="OS-Lab5">OS-Lab5</a><time datetime="2026-05-27T13:33:12.000Z" title="发表于 2026-05-27 21:33:12">2026-05-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/05/21/OS-Lab4/" title="OS-Lab4"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab4"/></a><div class="content"><a class="title" href="/2026/05/21/OS-Lab4/" title="OS-Lab4">OS-Lab4</a><time datetime="2026-05-21T04:01:06.000Z" title="发表于 2026-05-21 12:01:06">2026-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/29/OS-Lab3/" title="OS-Lab3"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab3"/></a><div class="content"><a class="title" href="/2026/04/29/OS-Lab3/" title="OS-Lab3">OS-Lab3</a><time datetime="2026-04-29T13:50:01.000Z" title="发表于 2026-04-29 21:50:01">2026-04-29</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/top.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 - 2026 By Caxirye</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

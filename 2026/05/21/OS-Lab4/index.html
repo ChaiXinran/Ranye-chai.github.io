@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>OS-Lab4 | PlutoC</title><meta name="author" content="Caxirye"><meta name="copyright" content="Caxirye"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="量大管饱了属于是。。。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OS-Lab4">
+<meta property="og:url" content="http://ranyechai.site/2026/05/21/OS-Lab4/index.html">
+<meta property="og:site_name" content="PlutoC">
+<meta property="og:description" content="量大管饱了属于是。。。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ranyechai.site/images/OSCover.jpg">
+<meta property="article:published_time" content="2026-05-21T04:01:06.000Z">
+<meta property="article:modified_time" content="2026-05-28T10:00:18.824Z">
+<meta property="article:author" content="Caxirye">
+<meta property="article:tag" content="OS">
+<meta property="article:tag" content="lab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ranyechai.site/images/OSCover.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OS-Lab4",
+  "url": "http://ranyechai.site/2026/05/21/OS-Lab4/",
+  "image": "http://ranyechai.site/images/OSCover.jpg",
+  "datePublished": "2026-05-21T04:01:06.000Z",
+  "dateModified": "2026-05-28T10:00:18.824Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Caxirye",
+      "url": "http://ranyechai.site"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/plutoc-favicon.ico"><link rel="canonical" href="http://ranyechai.site/2026/05/21/OS-Lab4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'OS-Lab4',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/back.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/OSCover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">PlutoC</span></a><a class="nav-page-title" href="/"><span class="site-name">OS-Lab4</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">OS-Lab4</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-21T04:01:06.000Z" title="发表于 2026-05-21 12:01:06">2026-05-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-28T10:00:18.824Z" title="更新于 2026-05-28 18:00:18">2026-05-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OS/">OS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><h2 id="Thinking-4-1-系统调用现场与-Trapframe"><a href="#Thinking-4-1-系统调用现场与-Trapframe" class="headerlink" title="Thinking 4.1 系统调用现场与 Trapframe"></a>Thinking 4.1 系统调用现场与 Trapframe</h2><h3 id="1-内核在保存现场的时候是如何避免破坏通用寄存器的？"><a href="#1-内核在保存现场的时候是如何避免破坏通用寄存器的？" class="headerlink" title="1. 内核在保存现场的时候是如何避免破坏通用寄存器的？"></a>1. 内核在保存现场的时候是如何避免破坏通用寄存器的？</h3><p>用户执行 <code>syscall</code> 后，CPU 陷入内核，进入异常入口。内核不能直接随便使用用户寄存器，因为这些寄存器中保存着用户态运行现场，比如系统调用号、参数、返回地址等。</p>
+<p>MOS 通过 <code>SAVE_ALL</code> 宏把用户态通用寄存器、<code>cp0_epc</code>、<code>cp0_status</code>、<code>cp0_cause</code> 等保存到内核栈上的 <code>Trapframe</code> 中。这样之后内核即使使用寄存器，也不会丢失用户原来的现场。</p>
+<p>也就是说，保护现场的关键是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用户寄存器状态</span><br><span class="line">    ↓ SAVE_ALL</span><br><span class="line">内核栈上的 Trapframe</span><br></pre></td></tr></table></figure>
+<p>之后 C 函数 <code>do_syscall(struct Trapframe *tf)</code> 操作的是 <code>Trapframe</code>，而不是直接依赖原始寄存器。</p>
+<h3 id="2-系统陷入内核后可以直接从当时的-a0-a3-中得到用户调用-msyscall-留下的信息吗？"><a href="#2-系统陷入内核后可以直接从当时的-a0-a3-中得到用户调用-msyscall-留下的信息吗？" class="headerlink" title="2. 系统陷入内核后可以直接从当时的 $a0-$a3 中得到用户调用 msyscall 留下的信息吗？"></a>2. 系统陷入内核后可以直接从当时的 <code>$a0-$a3</code> 中得到用户调用 <code>msyscall</code> 留下的信息吗？</h3><p>不能直接依赖当前 CPU 寄存器中的 <code>$a0-$a3</code>。</p>
+<p>原因是陷入内核后，异常入口、保存现场、调用 C 函数的过程中，寄存器可能已经被内核代码使用或覆盖。指导书也说明，陷入内核后不是普通函数跳转，内核会先把用户现场保存到内核空间，随后通过 <code>Trapframe *</code> 获取用户态参数。</p>
+<p>所以应该从 <code>tf-&gt;regs[]</code> 里取参数，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sysno = tf-&gt;regs[<span class="number">4</span>]; <span class="comment">// 用户态 $a0</span></span><br><span class="line">arg1  = tf-&gt;regs[<span class="number">5</span>]; <span class="comment">// 用户态 $a1</span></span><br><span class="line">arg2  = tf-&gt;regs[<span class="number">6</span>]; <span class="comment">// 用户态 $a2</span></span><br><span class="line">arg3  = tf-&gt;regs[<span class="number">7</span>]; <span class="comment">// 用户态 $a3</span></span><br></pre></td></tr></table></figure>
+<p>对于更多参数，还需要按照调用约定从用户栈或保存现场中取出。</p>
+<h3 id="3-我们是怎么做到让-sys-开头的函数“认为”我们提供了和用户调用-msyscall-时同样的参数的？"><a href="#3-我们是怎么做到让-sys-开头的函数“认为”我们提供了和用户调用-msyscall-时同样的参数的？" class="headerlink" title="3. 我们是怎么做到让 sys_ 开头的函数“认为”我们提供了和用户调用 msyscall 时同样的参数的？"></a>3. 我们是怎么做到让 <code>sys_</code> 开头的函数“认为”我们提供了和用户调用 <code>msyscall</code> 时同样的参数的？</h3><p>靠 <code>do_syscall</code> 进行“参数转发”。</p>
+<p>用户态 <code>msyscall</code> 按约定把系统调用号和参数放到寄存器里，然后 <code>syscall</code> 陷入内核。内核保存现场后，<code>do_syscall</code> 从 <code>Trapframe</code> 中取出这些寄存器值，再调用对应的 <code>sys_*</code> 函数。</p>
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> sysno = tf-&gt;regs[<span class="number">4</span>];</span><br><span class="line">func = sys_table[sysno];</span><br><span class="line"></span><br><span class="line">ret = func(arg1, arg2, arg3, arg4, arg5);</span><br><span class="line">tf-&gt;regs[<span class="number">2</span>] = ret;</span><br></pre></td></tr></table></figure>
+<p>于是对于 <code>sys_mem_alloc(envid, va, perm)</code> 来说，它收到的参数就和用户态传给 <code>msyscall</code> 的参数保持一致。</p>
+<h3 id="4-内核处理系统调用的过程对-Trapframe-做了哪些更改？对应用户态变化是什么？"><a href="#4-内核处理系统调用的过程对-Trapframe-做了哪些更改？对应用户态变化是什么？" class="headerlink" title="4. 内核处理系统调用的过程对 Trapframe 做了哪些更改？对应用户态变化是什么？"></a>4. 内核处理系统调用的过程对 <code>Trapframe</code> 做了哪些更改？对应用户态变化是什么？</h3><p>主要改两个地方。</p>
+<p>第一，修改 <code>cp0_epc</code>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf-&gt;cp0_epc += <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<p>这是为了让系统调用返回后，从 <code>syscall</code> 指令的下一条指令继续执行。如果不加 4，返回用户态后会再次执行同一条 <code>syscall</code>，导致无限陷入内核。</p>
+<p>第二，修改返回值寄存器 <code>$v0</code>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf-&gt;regs[<span class="number">2</span>] = ret;</span><br></pre></td></tr></table></figure>
+<p>用户态恢复后，<code>$v0</code> 就是系统调用返回值。因此用户程序看到的是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = syscall_xxx(...);</span><br></pre></td></tr></table></figure>
+<p>就像普通函数返回一样。</p>
+<hr>
+<h2 id="Thinking-4-2-为什么-envid2env-需要判断-e-gt-env-id-envid？"><a href="#Thinking-4-2-为什么-envid2env-需要判断-e-gt-env-id-envid？" class="headerlink" title="Thinking 4.2 为什么 envid2env 需要判断 e-&gt;env_id != envid？"></a>Thinking 4.2 为什么 <code>envid2env</code> 需要判断 <code>e-&gt;env_id != envid</code>？</h2><p><code>envid2env</code> 会通过 <code>ENVX(envid)</code> 得到 <code>envs[]</code> 数组下标：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e = &amp;envs[ENVX(envid)];</span><br></pre></td></tr></table></figure>
+<p>但这个下标只能说明“这个 <code>envid</code> 对应哪个槽位”，不能说明“这个槽位现在的进程就是原来的那个进程”。</p>
+<p>因为 <code>Env</code> 数组中的槽位会被反复复用。假设：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">envs[3] 原来是进程 A，env_id = A_id</span><br><span class="line">A 退出后，envs[3] 被释放</span><br><span class="line">后来 envs[3] 分配给进程 B，env_id = B_id</span><br></pre></td></tr></table></figure>
+<p>如果没有判断：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e-&gt;env_id != envid</span><br></pre></td></tr></table></figure>
+<p>那么别人拿着旧的 <code>A_id</code>，仍然能通过 <code>ENVX(A_id)</code> 找到 <code>envs[3]</code>，结果错误地访问到新进程 B。</p>
+<p>所以这一步的作用是防止“旧进程 ID 误命中新进程控制块”。</p>
+<p>简洁地说：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ENVX(envid) 只能检查数组位置；</span><br><span class="line">e-&gt;env_id == envid 才能检查这个位置上的进程是不是目标进程。</span><br></pre></td></tr></table></figure>
+<p>没有这步判断，会导致已经失效的旧 <code>envid</code> 仍然可能操作新进程，破坏进程隔离和系统安全。</p>
+<hr>
+<h2 id="Thinking-4-3-为什么-mkenvid-不会返回-0？结合系统调用、IPC-和-envid2env-解释"><a href="#Thinking-4-3-为什么-mkenvid-不会返回-0？结合系统调用、IPC-和-envid2env-解释" class="headerlink" title="Thinking 4.3 为什么 mkenvid() 不会返回 0？结合系统调用、IPC 和 envid2env() 解释"></a>Thinking 4.3 为什么 <code>mkenvid()</code> 不会返回 0？结合系统调用、IPC 和 <code>envid2env()</code> 解释</h2><p><code>mkenvid()</code> 不返回 0，是因为在 MOS 中 <code>envid == 0</code> 被赋予了特殊含义：表示“当前进程”。</p>
+<p>例如很多系统调用中会传入 <code>envid</code>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sys_mem_alloc(<span class="number">0</span>, va, perm);</span><br><span class="line">sys_mem_map(<span class="number">0</span>, srcva, dstid, dstva, perm);</span><br><span class="line">sys_ipc_recv(dstva);</span><br></pre></td></tr></table></figure>
+<p>其中 <code>0</code> 常常表示“不需要显式指定进程，就使用当前进程 <code>curenv</code>”。</p>
+<p><code>envid2env</code> 中也会处理这种特殊情况：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (envid == <span class="number">0</span>) &#123;</span><br><span class="line">    *env_store = curenv;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以如果 <code>mkenvid()</code> 真的生成了 0，就会造成严重歧义：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">envid == 0</span><br><span class="line">既可能表示真正 ID 为 0 的进程</span><br><span class="line">又可能表示当前进程</span><br></pre></td></tr></table></figure>
+<p>在 IPC 中也类似。发送方、接收方会通过 <code>envid</code> 标识对方。如果某个真实进程 ID 是 0，那么系统就无法区分“目标是 0 号进程”还是“目标是当前进程”。</p>
+<p>因此 <code>mkenvid()</code> 不返回 0 的根本原因是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 被保留为特殊进程标识，表示 curenv；</span><br><span class="line">真实进程 ID 必须非 0，避免和系统调用约定冲突。</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Thinking-4-4-fork-两个返回值，哪个说法正确？"><a href="#Thinking-4-4-fork-两个返回值，哪个说法正确？" class="headerlink" title="Thinking 4.4 fork 两个返回值，哪个说法正确？"></a>Thinking 4.4 fork 两个返回值，哪个说法正确？</h2><p>题目选项：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A、fork 在父进程中被调用两次，产生两个返回值</span><br><span class="line">B、fork 在两个进程中分别被调用一次，产生两个不同的返回值</span><br><span class="line">C、fork 只在父进程中被调用了一次，在两个进程中各产生一个返回值</span><br><span class="line">D、fork 只在子进程中被调用了一次，在两个进程中各产生一个返回值</span><br></pre></td></tr></table></figure>
+<p>正确答案是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C、fork 只在父进程中被调用了一次，在两个进程中各产生一个返回值</span><br></pre></td></tr></table></figure>
+<p>原因是：调用 <code>fork()</code> 时，最初只有父进程存在，因此 <code>fork</code> 只可能是父进程主动调用的。执行过程中，父进程通过 <code>sys_exofork</code> 创建子进程，并复制父进程的运行现场给子进程。</p>
+<p>之后父子进程都会从“类似 fork 返回的位置”继续执行。但这不是因为 <code>fork</code> 被调用了两次，而是因为子进程继承了父进程在 <code>fork</code> 附近的运行现场。</p>
+<p>父进程得到：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fork() 返回 child_envid;</span><br></pre></td></tr></table></figure>
+<p>子进程得到：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fork() 返回 <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>这两个不同返回值是通过修改子进程 Trapframe 中的 <code>$v0</code> 实现的。</p>
+<hr>
+<h2 id="Thinking-4-5-哪些用户空间页应该-duppage，哪些不应该？"><a href="#Thinking-4-5-哪些用户空间页应该-duppage，哪些不应该？" class="headerlink" title="Thinking 4.5 哪些用户空间页应该 duppage，哪些不应该？"></a>Thinking 4.5 哪些用户空间页应该 <code>duppage</code>，哪些不应该？</h2><p>不能对所有用户空间页都调用 <code>duppage</code>。应该根据内存布局和页面用途分类处理。</p>
+<h3 id="应该-duppage-的页"><a href="#应该-duppage-的页" class="headerlink" title="应该 duppage 的页"></a>应该 <code>duppage</code> 的页</h3><p>主要是父进程用户地址空间中已经映射、且需要被子进程继承的普通用户页：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">代码段页面</span><br><span class="line">数据段页面</span><br><span class="line">堆页面</span><br><span class="line">普通用户栈页面</span><br><span class="line">已经映射的共享库页面</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">只读页：直接只读共享；</span><br><span class="line">可写页：父子都改成 COW；</span><br><span class="line">PTE_COW 页：继续 COW；</span><br><span class="line">PTE_LIBRARY 页：保持共享可写。</span><br></pre></td></tr></table></figure>
+<h3 id="不应该-duppage-的页"><a href="#不应该-duppage-的页" class="headerlink" title="不应该 duppage 的页"></a>不应该 <code>duppage</code> 的页</h3><p>第一，未映射页面不处理。</p>
+<p>如果 <code>vpd</code> 或 <code>vpt</code> 显示对应页不存在，就不能映射。</p>
+<p>第二，内核空间不能处理。</p>
+<p>用户进程只能处理 <code>UTOP</code> 以下的用户空间，不能复制内核映射。</p>
+<p>第三，用户异常栈 <code>UXSTACK</code> 不应该 <code>duppage</code>。</p>
+<p>异常栈用于处理页写入异常。如果异常栈也设成 COW，那么处理 COW 异常时需要写异常栈，又会触发新的 COW 异常，可能导致递归异常。</p>
+<p>所以异常栈应该给子进程单独分配一页：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">syscall_mem_alloc(child, UXSTACKTOP - BY2PG, PTE_V | PTE_R | PTE_D);</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">普通用户页：duppage</span><br><span class="line">未映射页：跳过</span><br><span class="line">内核空间：跳过</span><br><span class="line">用户异常栈：单独分配，不 duppage</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Thinking-4-6-vpt-和-vpd-的作用、自映射，以及能否修改页表项"><a href="#Thinking-4-6-vpt-和-vpd-的作用、自映射，以及能否修改页表项" class="headerlink" title="Thinking 4.6 vpt 和 vpd 的作用、自映射，以及能否修改页表项"></a>Thinking 4.6 <code>vpt</code> 和 <code>vpd</code> 的作用、自映射，以及能否修改页表项</h2><h3 id="1-vpt-和-vpd-的作用是什么？怎样使用？"><a href="#1-vpt-和-vpd-的作用是什么？怎样使用？" class="headerlink" title="1. vpt 和 vpd 的作用是什么？怎样使用？"></a>1. <code>vpt</code> 和 <code>vpd</code> 的作用是什么？怎样使用？</h3><p><code>vpt</code> 用来查看当前进程的页表项 PTE。</p>
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vpt[VPN(va)]</span><br></pre></td></tr></table></figure>
+<p>可以得到虚拟地址 <code>va</code> 对应的页表项，从而判断：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">该页是否存在 PTE_V</span><br><span class="line">该页是否可写 PTE_D</span><br><span class="line">该页是否是 COW PTE_COW</span><br><span class="line">该页是否是共享页 PTE_LIBRARY</span><br></pre></td></tr></table></figure>
+<p><code>vpd</code> 用来查看页目录项 PDE。</p>
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vpd[PDX(va)]</span><br></pre></td></tr></table></figure>
+<p>可以判断某个 4MB 区域对应的页表是否存在。</p>
+<p>遍历地址空间时通常先看 <code>vpd</code>，再看 <code>vpt</code>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (vpd[PDX(va)] &amp; PTE_V) &#123;</span><br><span class="line">    <span class="keyword">if</span> (vpt[VPN(va)] &amp; PTE_V) &#123;</span><br><span class="line">        <span class="comment">// va 对应页面存在</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-为什么进程能够通过这种方式存取自身页表？"><a href="#2-为什么进程能够通过这种方式存取自身页表？" class="headerlink" title="2. 为什么进程能够通过这种方式存取自身页表？"></a>2. 为什么进程能够通过这种方式存取自身页表？</h3><p>因为 MOS 使用了页目录自映射。</p>
+<p>页目录中有一个 PDE 指向页目录自身所在的物理页。这样，页目录和页表这套结构也被映射进了当前进程的虚拟地址空间。</p>
+<p>于是用户进程可以通过固定虚拟地址区域读取自己的页目录和页表。</p>
+<h3 id="3-它们如何体现自映射设计？"><a href="#3-它们如何体现自映射设计？" class="headerlink" title="3. 它们如何体现自映射设计？"></a>3. 它们如何体现自映射设计？</h3><p>正常情况下，页表是内核维护的数据结构，用户进程不能直接知道它们在哪个物理地址。</p>
+<p>但自映射后：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">页目录本身被当成一个页表页映射进虚拟地址空间；</span><br><span class="line">所有页表页也通过固定虚拟地址窗口可见。</span><br></pre></td></tr></table></figure>
+<p>因此 <code>vpd</code>、<code>vpt</code> 本质上就是这个自映射窗口的两个视角：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vpd：查看页目录项</span><br><span class="line">vpt：查看页表项</span><br></pre></td></tr></table></figure>
+<h3 id="4-进程能够通过这种方式修改自己的页表项吗？"><a href="#4-进程能够通过这种方式修改自己的页表项吗？" class="headerlink" title="4. 进程能够通过这种方式修改自己的页表项吗？"></a>4. 进程能够通过这种方式修改自己的页表项吗？</h3><p>不能。</p>
+<p>用户进程只能通过 <code>vpt</code> 和 <code>vpd</code> 读取页表信息，不能直接修改。原因是这片自映射区域对用户态是只读的。</p>
+<p>如果用户能直接写页表项，就可以绕过内核权限检查，例如把只读页改成可写、把非法物理页映射进来，这会破坏系统安全。</p>
+<p>所以修改页表必须通过系统调用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syscall_mem_alloc</span><br><span class="line">syscall_mem_map</span><br><span class="line">syscall_mem_unmap</span><br></pre></td></tr></table></figure>
+<p>由内核检查合法性后再修改。</p>
+<hr>
+<h2 id="Thinking-4-7-do-tlb-mod-中异常重入与复制-Trapframe-到用户空间"><a href="#Thinking-4-7-do-tlb-mod-中异常重入与复制-Trapframe-到用户空间" class="headerlink" title="Thinking 4.7 do_tlb_mod 中异常重入与复制 Trapframe 到用户空间"></a>Thinking 4.7 <code>do_tlb_mod</code> 中异常重入与复制 Trapframe 到用户空间</h2><h3 id="1-什么时候会出现类似“异常重入”？"><a href="#1-什么时候会出现类似“异常重入”？" class="headerlink" title="1. 什么时候会出现类似“异常重入”？"></a>1. 什么时候会出现类似“异常重入”？</h3><p>异常重入指：正在处理一个异常时，又触发了新的同类或相关异常。</p>
+<p>在 Lab4 中典型场景是：用户程序写 COW 页面，触发 TLB Mod 异常，进入 <code>cow_entry</code>。但 <code>cow_entry</code> 本身在用户态执行，执行过程中也可能访问或写入某些页面。如果这些页面也触发异常，就会出现“处理异常时再次异常”。</p>
+<p>特别是如果异常处理过程中使用的栈也发生页写入异常，就会导致嵌套异常。</p>
+<p>因此 MOS 使用单独的用户异常栈 <code>UXSTACK</code>，并且在 <code>do_tlb_mod</code> 中要考虑当前是否已经在异常栈上。</p>
+<h3 id="2-内核为什么需要将异常现场-Trapframe-复制到用户空间？"><a href="#2-内核为什么需要将异常现场-Trapframe-复制到用户空间？" class="headerlink" title="2. 内核为什么需要将异常现场 Trapframe 复制到用户空间？"></a>2. 内核为什么需要将异常现场 <code>Trapframe</code> 复制到用户空间？</h3><p>因为 MOS 把页写入异常的主要处理逻辑放在用户态 <code>cow_entry</code> 中，而用户态处理函数需要知道异常发生时的完整现场，例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">出错地址 cp0_badvaddr</span><br><span class="line">原来的 EPC</span><br><span class="line">原来的 sp</span><br><span class="line">通用寄存器状态</span><br></pre></td></tr></table></figure>
+<p>这些信息原本保存在内核栈上的 <code>Trapframe</code> 中，用户态不能直接访问内核栈。所以内核要把 <code>Trapframe</code> 复制到用户异常栈上。</p>
+<p>这样 <code>cow_entry(struct Trapframe *tf)</code> 才能通过参数 <code>tf</code> 读取异常现场，完成 COW 后再调用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">syscall_set_trapframe(<span class="number">0</span>, tf);</span><br></pre></td></tr></table></figure>
+<p>恢复原来的执行现场。</p>
+<p>总结：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">复制 Trapframe 到用户空间</span><br><span class="line">= 让用户态异常处理函数能读取和恢复异常前现场。</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Thinking-4-8-用户态处理页写入异常相比内核态处理有什么优势？"><a href="#Thinking-4-8-用户态处理页写入异常相比内核态处理有什么优势？" class="headerlink" title="Thinking 4.8 用户态处理页写入异常相比内核态处理有什么优势？"></a>Thinking 4.8 用户态处理页写入异常相比内核态处理有什么优势？</h2><p>用户态处理页写入异常的优势主要是“机制与策略分离”。</p>
+<p>内核只负责：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">识别 TLB Mod 异常；</span><br><span class="line">保存现场；</span><br><span class="line">切换到用户注册的异常处理函数。</span><br></pre></td></tr></table></figure>
+<p>用户态负责：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">判断是否 COW；</span><br><span class="line">分配新页；</span><br><span class="line">复制原页面；</span><br><span class="line">重新映射；</span><br><span class="line">恢复现场。</span><br></pre></td></tr></table></figure>
+<p>这样有几个好处。</p>
+<p>第一，减小内核复杂度。</p>
+<p>COW 的具体策略不需要写死在内核里，内核只提供异常分发和内存映射系统调用即可。</p>
+<p>第二，更符合微内核思想。</p>
+<p>MOS 后续文件系统、IPC 等都倾向于把复杂功能放到用户态完成，内核只保留必要机制。</p>
+<p>第三，灵活性更高。</p>
+<p>不同用户程序理论上可以注册不同的页写入异常处理函数，实现不同的用户态异常策略。</p>
+<p>第四，安全边界仍然清晰。</p>
+<p>用户态虽然处理异常，但真正修改页表、分配页面仍然要通过系统调用，由内核检查权限。</p>
+<p>所以简洁地说：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户态处理 COW：内核更小，策略更灵活，仍由系统调用保证安全。</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Thinking-4-9-为什么设置-COW-之前要先设置父进程页写入异常处理函数？"><a href="#Thinking-4-9-为什么设置-COW-之前要先设置父进程页写入异常处理函数？" class="headerlink" title="Thinking 4.9 为什么设置 COW 之前要先设置父进程页写入异常处理函数？"></a>Thinking 4.9 为什么设置 COW 之前要先设置父进程页写入异常处理函数？</h2><p>因为一旦开始设置写时复制保护，父进程自己的某些可写页也会被改成：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PTE_COW = 1</span><br><span class="line">PTE_D = 0</span><br></pre></td></tr></table></figure>
+<p>此后父进程如果写这些页面，就会触发 TLB Mod 异常。</p>
+<p>如果此时还没有通过：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">syscall_set_tlb_mod_entry(<span class="number">0</span>, cow_entry);</span><br></pre></td></tr></table></figure>
+<p>设置父进程的页写入异常处理函数，那么异常发生后内核不知道应该返回到哪个用户态处理入口，COW 无法完成，程序可能直接崩溃或 panic。</p>
+<p>所以顺序必须是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">先注册父进程 cow_entry</span><br><span class="line">再 duppage 设置 COW</span><br><span class="line">再注册子进程 cow_entry</span><br><span class="line">最后设置子进程 runnable</span><br></pre></td></tr></table></figure>
+<p>如果反过来，在写时复制保护完成之后才设置处理函数，那么中间会有危险窗口：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">页面已经 COW</span><br><span class="line">但异常处理函数还没注册</span><br></pre></td></tr></table></figure>
+<p>这时只要父进程发生一次写操作，就会触发无法处理的 TLB Mod 异常。</p>
+<p>因此答案是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">设置 COW 会让父进程自身也可能触发页写入异常；</span><br><span class="line">所以必须先设置父进程的 TLB Mod 异常处理入口。</span><br></pre></td></tr></table></figure>
+<p>这也是 <code>fork</code> 中先调用 <code>syscall_set_tlb_mod_entry</code>，再进行地址空间复制和 COW 标记的原因。</p>
+<h1 id="难点分析"><a href="#难点分析" class="headerlink" title="难点分析"></a>难点分析</h1><p>指导书中 Lab4 的目标包括掌握系统调用流程、实现 IPC、实现 fork、掌握页写入异常处理流程。 去年上机题也正是围绕“新增系统调用”和“修改 fork/duppage 对特定权限页的处理”展开：一部分要求增加 <code>sys_get_ppid</code>，另一部分要求增加 <code>PTE_PROTECT</code>，使带该标志的页在 fork 时不复制、不映射给子进程。</p>
+<h2 id="一、系统调用流程的理解与实现"><a href="#一、系统调用流程的理解与实现" class="headerlink" title="一、系统调用流程的理解与实现"></a>一、系统调用流程的理解与实现</h2><p>Lab4 的第一个难点是理解系统调用并不是普通的函数调用，而是一次从用户态进入内核态的受控切换。用户进程不能直接访问内核空间，也不能直接调用内核函数，因此需要通过 <code>syscall</code> 指令触发异常，进入内核后再由内核根据系统调用号调用对应的 <code>sys_*</code> 函数。</p>
+<p>在实现过程中，需要理清用户态和内核态之间的参数传递关系。用户态的 <code>msyscall</code> 将系统调用号和参数放入指定寄存器，执行 <code>syscall</code> 后进入异常处理流程。内核保存现场到 <code>Trapframe</code> 中，再由 <code>do_syscall</code> 从 <code>Trapframe</code> 中取出系统调用号和参数，分发到对应的内核系统调用函数。返回时，内核还要将返回值写回 <code>Trapframe</code> 中的返回值寄存器，使用户态恢复执行后能够像普通函数调用一样获得返回值。</p>
+<p>这一部分的难点不在代码量，而在于理解“用户态函数声明—汇编系统调用入口—内核分发函数—具体系统调用实现”之间的对应关系。去年上机题中新增 <code>sys_get_ppid</code> 正好考察了这一点：需要同时在 <code>include/syscall.h</code> 中增加系统调用号，在 <code>kern/syscall_all.c</code> 中实现内核函数并加入系统调用表，在用户态头文件和库函数中增加封装接口。这个题目说明，新增系统调用本质上不是只写一个函数，而是要打通用户态到内核态的完整调用链。</p>
+<h2 id="二、envid2env-与系统调用权限检查"><a href="#二、envid2env-与系统调用权限检查" class="headerlink" title="二、envid2env 与系统调用权限检查"></a>二、<code>envid2env</code> 与系统调用权限检查</h2><p>Lab4 中大量系统调用都需要根据用户传入的 <code>envid</code> 找到对应进程，例如内存映射、进程状态修改、IPC 发送等。因此 <code>envid2env</code> 是连接用户参数和内核数据结构的重要函数。</p>
+<p>这一部分的难点主要体现在两个方面。第一，不能只通过 <code>ENVX(envid)</code> 找到 <code>envs[]</code> 数组下标后就直接使用对应的 <code>Env</code>，还必须检查 <code>e-&gt;env_id == envid</code>。因为进程控制块数组中的槽位会被复用，如果不检查完整的 <code>env_id</code>，旧的进程号可能错误地访问到后来复用该槽位的新进程。</p>
+<p>第二，系统调用必须进行权限检查。用户传入的 <code>envid</code>、虚拟地址、权限位都不可信，内核需要检查目标进程是否存在、调用者是否有权访问目标进程、虚拟地址是否低于 <code>UTOP</code>、地址是否页对齐、权限位是否合法等。通过这一部分可以体会到，系统调用虽然为用户态提供了内核能力，但必须通过严格检查保证系统安全。</p>
+<h2 id="三、内存相关系统调用与页表操作的衔接"><a href="#三、内存相关系统调用与页表操作的衔接" class="headerlink" title="三、内存相关系统调用与页表操作的衔接"></a>三、内存相关系统调用与页表操作的衔接</h2><p><code>sys_mem_alloc</code>、<code>sys_mem_map</code>、<code>sys_mem_unmap</code> 是 Lab4 中非常关键的一组系统调用。它们把 Lab2 中实现的页表管理能力开放给用户态，使用户程序可以通过系统调用间接完成页面分配、页面映射和解除映射。</p>
+<p>这一部分的难点在于：表面上是在写系统调用，实际上调用的是 Lab2 中的 <code>page_alloc</code>、<code>page_insert</code>、<code>page_remove</code>、<code>page_lookup</code> 等页表操作函数。因此必须重新理解页表项权限位的含义。指导书中说明，<code>PTE_V</code> 表示有效位，<code>PTE_D</code> 表示可写位，<code>PTE_COW</code> 用于 Lab4 的写时复制，<code>PTE_LIBRARY</code> 后续用于共享页面。</p>
+<h2 id="四、IPC-机制的实现"><a href="#四、IPC-机制的实现" class="headerlink" title="四、IPC 机制的实现"></a>四、IPC 机制的实现</h2><p>IPC 部分的难点在于理解它并不是简单的函数调用，而是两个进程之间通过内核进行同步和数据传递。接收方调用 <code>sys_ipc_recv</code> 后，需要设置自己的接收状态、接收地址，并进入不可运行状态；发送方调用 <code>sys_ipc_try_send</code> 时，内核检查目标进程是否正在等待接收，如果可以发送，就填写接收方的 IPC 相关字段，并把接收方重新设置为可运行。</p>
+<p>IPC 传递的内容包括两类：一类是普通整数值，另一类是可选的页面映射。如果发送方提供了合法的 <code>srcva</code>，接收方也提供了合法的 <code>dstva</code>，内核就需要把发送方的物理页面映射到接收方地址空间中。也就是说，IPC 同时复用了进程管理和页表管理机制。</p>
+<h2 id="五、fork-与写时复制机制"><a href="#五、fork-与写时复制机制" class="headerlink" title="五、fork 与写时复制机制"></a>五、fork 与写时复制机制</h2><p>Lab4 的核心难点是 <code>fork</code>。<code>fork</code> 不是单个系统调用完成的，而是由用户态函数通过多个系统调用组合实现的。<code>sys_exofork</code> 只负责创建子进程并复制父进程的寄存器现场，子进程的地址空间复制则由用户态 <code>fork</code> 通过遍历页表并调用 <code>duppage</code> 完成。</p>
+<p>为了提高效率，Lab4 使用写时复制机制。普通可写页面在 fork 时不立即复制物理页，而是将父子进程的页表项都改为只读并标记 <code>PTE_COW</code>。当父进程或子进程真正写入该页时，才触发页写入异常，由异常处理函数分配新页并复制原内容。</p>
+<p>这一部分最容易出错的是 <code>duppage</code> 中对不同页面权限的分类处理。只读页可以直接共享；可写页需要父子都改为 COW；已经是 COW 的页要继续以 COW 方式共享；用户异常栈不能 COW，而要为子进程单独分配；带特殊标志的页面还要按照其语义单独处理。去年上机题中的 <code>PTE_PROTECT</code> 就是这一类特殊情况：如果当前页带有 <code>PTE_PROTECT</code>，则 <code>duppage</code> 应该提前结束，不继续映射给子进程。子进程之后访问该地址时，会因为没有映射而触发被动分配，形成与父进程无关的新页面。这个考点实际上是在考察对 <code>duppage</code> 分类逻辑的理解，而不是单纯记忆 COW 模板。</p>
+<h2 id="六、页写入异常处理流程"><a href="#六、页写入异常处理流程" class="headerlink" title="六、页写入异常处理流程"></a>六、页写入异常处理流程</h2><p>写时复制能够成立，依赖于页写入异常处理。COW 页被设置为不可写，当进程尝试写入时，会触发 TLB Mod 异常。内核侧的 <code>do_tlb_mod</code> 判断异常是否来自合法的 COW 页面，然后将异常现场保存到用户异常栈，并跳转到用户态注册的异常处理函数 <code>cow_entry</code>。</p>
+<p><code>cow_entry</code> 的任务是真正完成页面复制：根据异常地址找到页边界，分配临时页面，将原页面内容复制过去，解除旧映射，再将新页面以可写权限映射回原地址，最后恢复异常前现场继续执行。</p>
+<p>这一部分的难点在于理解内核和用户态的分工。内核并不直接完成 COW 复制，而是提供异常分发、页分配、页映射等机制；用户态负责具体的写时复制策略。这体现了 MOS 中“内核提供机制，用户态实现策略”的设计思想。</p>
+<h1 id="实验体会"><a href="#实验体会" class="headerlink" title="实验体会"></a>实验体会</h1><h3 id="1-Lab4"><a href="#1-Lab4" class="headerlink" title="1. Lab4"></a>1. Lab4</h3><p>通过 Lab4，我对操作系统中用户态和内核态之间的关系有了更清晰的认识。之前的 Lab2 和 Lab3 更多是在内核内部实现页表、进程和异常机制，而 Lab4 则把这些机制封装成用户态可以使用的系统调用接口。也就是说，Lab4 是前面实验内容的一次综合应用：页表管理、进程控制、异常处理都通过系统调用机制连接起来，最终支撑 IPC 和 fork 的实现。</p>
+<p>本次实验让我体会最深的是，操作系统中的很多功能并不是孤立存在的。例如，<code>fork</code> 表面上是进程创建函数，但它实际依赖 <code>sys_exofork</code> 创建进程，依赖 <code>sys_mem_map</code> 建立地址空间映射，依赖 <code>sys_mem_alloc</code> 分配异常栈，依赖 <code>sys_set_env_status</code> 启动子进程，依赖页写入异常处理完成 COW。只有把这些模块串起来，才能真正理解 Lab4 的整体结构。</p>
+<p>Lab4 让我对写时复制有了更直观的理解。COW 的关键思想不是简单地“不复制”，而是“延迟复制”：fork 时通过共享页面降低开销，真正写入时再借助页写入异常完成复制。这个机制把页表权限、异常处理和用户态页面管理结合在一起，是整个实验中最能体现操作系统设计思想的一部分。通过完成 Lab4，我更加理解了操作系统如何在安全性、效率和灵活性之间进行权衡。</p>
+<h3 id="2-Lab4-pre-exam"><a href="#2-Lab4-pre-exam" class="headerlink" title="2. Lab4-pre-exam"></a>2. Lab4-pre-exam</h3><p>很简单感觉，按部就班地弄就行了，就是得了解一下<code>env.h</code>中<code>env</code>结构体的定义。</p>
+<h3 id="3-Lab4-pre-extra"><a href="#3-Lab4-pre-extra" class="headerlink" title="3. Lab4-pre-extra"></a>3. Lab4-pre-extra</h3><p>也是逻辑上很清晰，但是要注意<code>pp_ref</code>的增减，合理使用<code>page_insert()``page_remove()``page_decref</code>这三个函数即可。</p>
+<h3 id="4-Lab4-exam"><a href="#4-Lab4-exam" class="headerlink" title="4. Lab4-exam"></a>4. Lab4-exam</h3><p>和去年的题很像，注意<code>page_lookup()</code>的使用，别的没什么难的，注意合法地址的判断不能直接用<code>is_illegal_va</code>。</p>
+<h3 id="5-Lab4-extra"><a href="#5-Lab4-extra" class="headerlink" title="5. Lab4-extra"></a>5. Lab4-extra</h3><p>量大管饱了属于是。<br>总共19个空，还有一堆别的要添加的东西。<br>整体上除了第19空我不太确定<code>dirty_remove()</code>赋值到哪里之外别的全都很顺利。<br>但是因为第19空的问题我写完之后编译没有过，交上去喜提0分。<br>后来已经改好了但是还在冷却时间，时间到了，也没法提交了。<br>很遗憾但是不是特别伤心。至少说明问题不是很大()<br>最后上机当天不要听歌()不然全神贯注的脑子里突然冒出来一句歌词直接思考暂停()</p>
+<p>课下又做了一下，也发现确实有一些点理解有误写得有问题：</p>
+<ol>
+<li>幼稚的错误:<ol>
+<li><code>PTE_D</code>和<code>PTE_V</code>不分，设置权限的时候写反了().</li>
+<li><code>sys_start_dirty_log</code>中间设置<code>log_enabled</code>那一步直接没看到().</li>
+</ol>
+</li>
+<li>确实有问题的地方：<ol>
+<li>检查 <code>ptr</code> 指向的虚拟地址的合法性:实际上检查的还是<code>ptr</code>,我一看到<strong>指向</strong>就写的检查<code>*ptr</code>，但实际上后续<code>*ptr</code>又被赋了一个新的值，显然这个写法下该检查毫无意义.</li>
+<li>如果<code>entry=0</code>则取消设置:暗示的其实是判断条件<code>entry != 0 &amp;&amp; is_illegal_va(entry)</code>时返回<code>-E_INVAL</code>,<strong>取消设置</strong>的意思不是把<code>log_enabled</code>设置为<code>0</code>.</li>
+<li>第19空,hh这个当时真没理解<strong>写入</strong>什么意思，感觉是没看见第13步…<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 12. 在异常栈上分配保存脏页记录的空间</span></span><br><span class="line"><span class="comment">// HINT: 我们总是假定用户异常栈上有足够的空间来容纳陷阱帧和所有脏页记录</span></span><br><span class="line"><span class="comment">// HINT: 你可以参考“10. 在异常栈上分配保存陷阱帧的空间”的方式进行分配，注意分配的空间应当能保存下所有脏页</span></span><br><span class="line"><span class="comment">// HINT: 脏页队列的容量为 ENV_MAX_DIRTY_LOG_COUNT （dirtyqueue.h）</span></span><br><span class="line"><span class="comment">// HINT: 将脏页记录按照一维数组的形式复制到用户异常栈，每个元素的大小为 sizeof(u_long)</span></span><br><span class="line"><span class="comment">// Lab4-Extra: Your code here. (18 / 19)</span></span><br><span class="line">tf-&gt;regs[<span class="number">29</span>] -= <span class="keyword">sizeof</span>(u_long) * ENV_MAX_DIRTY_LOG_COUNT;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 13. 记录脏页记录的起始地址</span></span><br><span class="line">u_long user_log_addr = tf-&gt;regs[<span class="number">29</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 14. 逐一将脏页记录出队，并写入异常栈上分配的空间中</span></span><br><span class="line"><span class="comment">// HINT: 代码执行到此处，前提条件是脏页队列已满</span></span><br><span class="line"><span class="comment">// HINT: 脏页队列的容量为 ENV_MAX_DIRTY_LOG_COUNT （dirtyqueue.h）</span></span><br><span class="line"><span class="comment">// Lab4-Extra: Your code here. (19 / 19)</span></span><br><span class="line">u_long *user_log_ptr = (u_long *)user_log_addr;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; ENV_MAX_DIRTY_LOG_COUNT; i++) &#123;</span><br><span class="line">    user_log_ptr[i] = dirty_remove(&amp;curenv-&gt;log_queue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="原创说明"><a href="#原创说明" class="headerlink" title="原创说明"></a>原创说明</h1><p>参考了往届三位学长学姐的博客。感谢他们的精心整理和付出。<br><a target="_blank" rel="noopener" href="https://hyggge.github.io">https://hyggge.github.io</a><br><a target="_blank" rel="noopener" href="https://yanna-zy.github.io">https://yanna-zy.github.io</a><br><a target="_blank" rel="noopener" href="https://demiurge-zby.github.io">https://demiurge-zby.github.io</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://ranyechai.site">Caxirye</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://ranyechai.site/2026/05/21/OS-Lab4/">http://ranyechai.site/2026/05/21/OS-Lab4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://ranyechai.site" target="_blank">PlutoC</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OS/">OS</a><a class="post-meta__tags" href="/tags/lab/">lab</a></div><div class="post-share"><div class="social-share" data-image="/images/OSCover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/05/27/OS-Lab5/" title="OS-Lab5"><img class="cover" src="/images/OSCover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">OS-Lab5</div></div><div class="info-2"><div class="info-item-1">奖励关！</div></div></div></a><a class="pagination-related" href="/2026/04/29/OS-Lab3/" title="OS-Lab3"><img class="cover" src="/images/OSCover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">OS-Lab3</div></div><div class="info-2"><div class="info-item-1">惊险完成</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/05/28/OS-Lab0/" title="OS-Lab0"><img class="cover" src="/images/OSCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-28</div><div class="info-item-2">OS-Lab0</div></div><div class="info-2"><div class="info-item-1">上机大失败，轻敌了！！！</div></div></div></a><a class="pagination-related" href="/2026/04/01/OS-Lab1/" title="OS-Lab1"><img class="cover" src="/images/OSCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-01</div><div class="info-item-2">OS-Lab1</div></div><div class="info-2"><div class="info-item-1">顺利上机~</div></div></div></a><a class="pagination-related" href="/2026/04/29/OS-Lab3/" title="OS-Lab3"><img class="cover" src="/images/OSCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-29</div><div class="info-item-2">OS-Lab3</div></div><div class="info-2"><div class="info-item-1">惊险完成</div></div></div></a><a class="pagination-related" href="/2026/04/16/OS-Lab2/" title="OS-Lab2"><img class="cover" src="/images/OSCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-16</div><div class="info-item-2">OS-Lab2</div></div><div class="info-2"><div class="info-item-1">自映射我不喜欢你！</div></div></div></a><a class="pagination-related" href="/2026/05/27/OS-Lab5/" title="OS-Lab5"><img class="cover" src="/images/OSCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-27</div><div class="info-item-2">OS-Lab5</div></div><div class="info-2"><div class="info-item-1">奖励关！</div></div></div></a><a class="pagination-related" href="/2026/03/04/Linux-Basic-Usage/" title="Linux_Basic_Usage"><img class="cover" src="/images/OOpreWork.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-04</div><div class="info-item-2">Linux_Basic_Usage</div></div><div class="info-2"><div class="info-item-1">假期预习~你看看是假期吗</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Caxirye</div><div class="author-info-description">just explore</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ranye-chai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Ranye-chai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">思考题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-1-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%8E%B0%E5%9C%BA%E4%B8%8E-Trapframe"><span class="toc-number">1.1.</span> <span class="toc-text">Thinking 4.1 系统调用现场与 Trapframe</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%86%85%E6%A0%B8%E5%9C%A8%E4%BF%9D%E5%AD%98%E7%8E%B0%E5%9C%BA%E7%9A%84%E6%97%B6%E5%80%99%E6%98%AF%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E7%A0%B4%E5%9D%8F%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E7%9A%84%EF%BC%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 内核在保存现场的时候是如何避免破坏通用寄存器的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%B3%BB%E7%BB%9F%E9%99%B7%E5%85%A5%E5%86%85%E6%A0%B8%E5%90%8E%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E4%BB%8E%E5%BD%93%E6%97%B6%E7%9A%84-a0-a3-%E4%B8%AD%E5%BE%97%E5%88%B0%E7%94%A8%E6%88%B7%E8%B0%83%E7%94%A8-msyscall-%E7%95%99%E4%B8%8B%E7%9A%84%E4%BF%A1%E6%81%AF%E5%90%97%EF%BC%9F"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 系统陷入内核后可以直接从当时的 $a0-$a3 中得到用户调用 msyscall 留下的信息吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%88%91%E4%BB%AC%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E5%88%B0%E8%AE%A9-sys-%E5%BC%80%E5%A4%B4%E7%9A%84%E5%87%BD%E6%95%B0%E2%80%9C%E8%AE%A4%E4%B8%BA%E2%80%9D%E6%88%91%E4%BB%AC%E6%8F%90%E4%BE%9B%E4%BA%86%E5%92%8C%E7%94%A8%E6%88%B7%E8%B0%83%E7%94%A8-msyscall-%E6%97%B6%E5%90%8C%E6%A0%B7%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%EF%BC%9F"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. 我们是怎么做到让 sys_ 开头的函数“认为”我们提供了和用户调用 msyscall 时同样的参数的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%86%85%E6%A0%B8%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E8%BF%87%E7%A8%8B%E5%AF%B9-Trapframe-%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E6%9B%B4%E6%94%B9%EF%BC%9F%E5%AF%B9%E5%BA%94%E7%94%A8%E6%88%B7%E6%80%81%E5%8F%98%E5%8C%96%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.4.</span> <span class="toc-text">4. 内核处理系统调用的过程对 Trapframe 做了哪些更改？对应用户态变化是什么？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-2-%E4%B8%BA%E4%BB%80%E4%B9%88-envid2env-%E9%9C%80%E8%A6%81%E5%88%A4%E6%96%AD-e-gt-env-id-envid%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">Thinking 4.2 为什么 envid2env 需要判断 e-&gt;env_id !&#x3D; envid？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-3-%E4%B8%BA%E4%BB%80%E4%B9%88-mkenvid-%E4%B8%8D%E4%BC%9A%E8%BF%94%E5%9B%9E-0%EF%BC%9F%E7%BB%93%E5%90%88%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E3%80%81IPC-%E5%92%8C-envid2env-%E8%A7%A3%E9%87%8A"><span class="toc-number">1.3.</span> <span class="toc-text">Thinking 4.3 为什么 mkenvid() 不会返回 0？结合系统调用、IPC 和 envid2env() 解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-4-fork-%E4%B8%A4%E4%B8%AA%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%8C%E5%93%AA%E4%B8%AA%E8%AF%B4%E6%B3%95%E6%AD%A3%E7%A1%AE%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">Thinking 4.4 fork 两个返回值，哪个说法正确？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-5-%E5%93%AA%E4%BA%9B%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E9%A1%B5%E5%BA%94%E8%AF%A5-duppage%EF%BC%8C%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%BA%94%E8%AF%A5%EF%BC%9F"><span class="toc-number">1.5.</span> <span class="toc-text">Thinking 4.5 哪些用户空间页应该 duppage，哪些不应该？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E8%AF%A5-duppage-%E7%9A%84%E9%A1%B5"><span class="toc-number">1.5.1.</span> <span class="toc-text">应该 duppage 的页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%BA%94%E8%AF%A5-duppage-%E7%9A%84%E9%A1%B5"><span class="toc-number">1.5.2.</span> <span class="toc-text">不应该 duppage 的页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.3.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-6-vpt-%E5%92%8C-vpd-%E7%9A%84%E4%BD%9C%E7%94%A8%E3%80%81%E8%87%AA%E6%98%A0%E5%B0%84%EF%BC%8C%E4%BB%A5%E5%8F%8A%E8%83%BD%E5%90%A6%E4%BF%AE%E6%94%B9%E9%A1%B5%E8%A1%A8%E9%A1%B9"><span class="toc-number">1.6.</span> <span class="toc-text">Thinking 4.6 vpt 和 vpd 的作用、自映射，以及能否修改页表项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-vpt-%E5%92%8C-vpd-%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%80%8E%E6%A0%B7%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-number">1.6.1.</span> <span class="toc-text">1. vpt 和 vpd 的作用是什么？怎样使用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%9B%E7%A8%8B%E8%83%BD%E5%A4%9F%E9%80%9A%E8%BF%87%E8%BF%99%E7%A7%8D%E6%96%B9%E5%BC%8F%E5%AD%98%E5%8F%96%E8%87%AA%E8%BA%AB%E9%A1%B5%E8%A1%A8%EF%BC%9F"><span class="toc-number">1.6.2.</span> <span class="toc-text">2. 为什么进程能够通过这种方式存取自身页表？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AE%83%E4%BB%AC%E5%A6%82%E4%BD%95%E4%BD%93%E7%8E%B0%E8%87%AA%E6%98%A0%E5%B0%84%E8%AE%BE%E8%AE%A1%EF%BC%9F"><span class="toc-number">1.6.3.</span> <span class="toc-text">3. 它们如何体现自映射设计？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BF%9B%E7%A8%8B%E8%83%BD%E5%A4%9F%E9%80%9A%E8%BF%87%E8%BF%99%E7%A7%8D%E6%96%B9%E5%BC%8F%E4%BF%AE%E6%94%B9%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%B5%E8%A1%A8%E9%A1%B9%E5%90%97%EF%BC%9F"><span class="toc-number">1.6.4.</span> <span class="toc-text">4. 进程能够通过这种方式修改自己的页表项吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-7-do-tlb-mod-%E4%B8%AD%E5%BC%82%E5%B8%B8%E9%87%8D%E5%85%A5%E4%B8%8E%E5%A4%8D%E5%88%B6-Trapframe-%E5%88%B0%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4"><span class="toc-number">1.7.</span> <span class="toc-text">Thinking 4.7 do_tlb_mod 中异常重入与复制 Trapframe 到用户空间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BC%9A%E5%87%BA%E7%8E%B0%E7%B1%BB%E4%BC%BC%E2%80%9C%E5%BC%82%E5%B8%B8%E9%87%8D%E5%85%A5%E2%80%9D%EF%BC%9F"><span class="toc-number">1.7.1.</span> <span class="toc-text">1. 什么时候会出现类似“异常重入”？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%86%85%E6%A0%B8%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%B0%86%E5%BC%82%E5%B8%B8%E7%8E%B0%E5%9C%BA-Trapframe-%E5%A4%8D%E5%88%B6%E5%88%B0%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%EF%BC%9F"><span class="toc-number">1.7.2.</span> <span class="toc-text">2. 内核为什么需要将异常现场 Trapframe 复制到用户空间？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-8-%E7%94%A8%E6%88%B7%E6%80%81%E5%A4%84%E7%90%86%E9%A1%B5%E5%86%99%E5%85%A5%E5%BC%82%E5%B8%B8%E7%9B%B8%E6%AF%94%E5%86%85%E6%A0%B8%E6%80%81%E5%A4%84%E7%90%86%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%EF%BC%9F"><span class="toc-number">1.8.</span> <span class="toc-text">Thinking 4.8 用户态处理页写入异常相比内核态处理有什么优势？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-9-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E7%BD%AE-COW-%E4%B9%8B%E5%89%8D%E8%A6%81%E5%85%88%E8%AE%BE%E7%BD%AE%E7%88%B6%E8%BF%9B%E7%A8%8B%E9%A1%B5%E5%86%99%E5%85%A5%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="toc-number">1.9.</span> <span class="toc-text">Thinking 4.9 为什么设置 COW 之前要先设置父进程页写入异常处理函数？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9A%BE%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">难点分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.1.</span> <span class="toc-text">一、系统调用流程的理解与实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81envid2env-%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E6%9D%83%E9%99%90%E6%A3%80%E6%9F%A5"><span class="toc-number">2.2.</span> <span class="toc-text">二、envid2env 与系统调用权限检查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E4%B8%8E%E9%A1%B5%E8%A1%A8%E6%93%8D%E4%BD%9C%E7%9A%84%E8%A1%94%E6%8E%A5"><span class="toc-number">2.3.</span> <span class="toc-text">三、内存相关系统调用与页表操作的衔接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81IPC-%E6%9C%BA%E5%88%B6%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.4.</span> <span class="toc-text">四、IPC 机制的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81fork-%E4%B8%8E%E5%86%99%E6%97%B6%E5%A4%8D%E5%88%B6%E6%9C%BA%E5%88%B6"><span class="toc-number">2.5.</span> <span class="toc-text">五、fork 与写时复制机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%A1%B5%E5%86%99%E5%85%A5%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="toc-number">2.6.</span> <span class="toc-text">六、页写入异常处理流程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BD%93%E4%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">实验体会</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Lab4"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. Lab4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Lab4-pre-exam"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. Lab4-pre-exam</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Lab4-pre-extra"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. Lab4-pre-extra</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Lab4-exam"><span class="toc-number">3.0.4.</span> <span class="toc-text">4. Lab4-exam</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Lab4-extra"><span class="toc-number">3.0.5.</span> <span class="toc-text">5. Lab4-extra</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E5%88%9B%E8%AF%B4%E6%98%8E"><span class="toc-number">4.</span> <span class="toc-text">原创说明</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/05/28/OO-Unit3/" title="OO-Unit3"><img src="/images/OOpreWork.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OO-Unit3"/></a><div class="content"><a class="title" href="/2026/05/28/OO-Unit3/" title="OO-Unit3">OO-Unit3</a><time datetime="2026-05-28T09:33:35.000Z" title="发表于 2026-05-28 17:33:35">2026-05-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/05/28/OS-Lab0/" title="OS-Lab0"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab0"/></a><div class="content"><a class="title" href="/2026/05/28/OS-Lab0/" title="OS-Lab0">OS-Lab0</a><time datetime="2026-05-28T09:32:44.000Z" title="发表于 2026-05-28 17:32:44">2026-05-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/05/27/OS-Lab5/" title="OS-Lab5"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab5"/></a><div class="content"><a class="title" href="/2026/05/27/OS-Lab5/" title="OS-Lab5">OS-Lab5</a><time datetime="2026-05-27T13:33:12.000Z" title="发表于 2026-05-27 21:33:12">2026-05-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/05/21/OS-Lab4/" title="OS-Lab4"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab4"/></a><div class="content"><a class="title" href="/2026/05/21/OS-Lab4/" title="OS-Lab4">OS-Lab4</a><time datetime="2026-05-21T04:01:06.000Z" title="发表于 2026-05-21 12:01:06">2026-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/29/OS-Lab3/" title="OS-Lab3"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab3"/></a><div class="content"><a class="title" href="/2026/04/29/OS-Lab3/" title="OS-Lab3">OS-Lab3</a><time datetime="2026-04-29T13:50:01.000Z" title="发表于 2026-04-29 21:50:01">2026-04-29</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/top.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 - 2026 By Caxirye</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

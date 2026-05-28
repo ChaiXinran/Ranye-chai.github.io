@@ -1,0 +1,373 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>OS-Lab1 | PlutoC</title><meta name="author" content="Caxirye"><meta name="copyright" content="Caxirye"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="顺利上机~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OS-Lab1">
+<meta property="og:url" content="http://ranyechai.site/2026/04/01/OS-Lab1/index.html">
+<meta property="og:site_name" content="PlutoC">
+<meta property="og:description" content="顺利上机~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ranyechai.site/images/OSCover.jpg">
+<meta property="article:published_time" content="2026-04-01T14:48:52.000Z">
+<meta property="article:modified_time" content="2026-05-28T09:50:12.216Z">
+<meta property="article:author" content="Caxirye">
+<meta property="article:tag" content="OS">
+<meta property="article:tag" content="lab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ranyechai.site/images/OSCover.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OS-Lab1",
+  "url": "http://ranyechai.site/2026/04/01/OS-Lab1/",
+  "image": "http://ranyechai.site/images/OSCover.jpg",
+  "datePublished": "2026-04-01T14:48:52.000Z",
+  "dateModified": "2026-05-28T09:50:12.216Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Caxirye",
+      "url": "http://ranyechai.site"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/plutoc-favicon.ico"><link rel="canonical" href="http://ranyechai.site/2026/04/01/OS-Lab1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'OS-Lab1',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/back.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/OSCover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">PlutoC</span></a><a class="nav-page-title" href="/"><span class="site-name">OS-Lab1</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">OS-Lab1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-04-01T14:48:52.000Z" title="发表于 2026-04-01 22:48:52">2026-04-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-28T09:50:12.216Z" title="更新于 2026-05-28 17:50:12">2026-05-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OS/">OS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Lab1"><a href="#Lab1" class="headerlink" title="Lab1"></a>Lab1</h1><h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><blockquote>
+<p>Thinking 1.1 在阅读 附录中的编译链接详解 以及本章内容后，尝试分别使用实验环境中的原生 x86 工具链（gcc、ld、readelf、objdump 等）和 MIPS 交叉编译工具链（带有mips-linux-gnu- 前缀，如 mips-linux-gnu-gcc、mips-linux-gnu-ld），重复其中的编译和解析过程，观察相应的结果，并解释其中向objdump传入的参数的含义。</p>
+</blockquote>
+<ol>
+<li><p>x86编译解析</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim hello.c</span><br></pre></td></tr></table></figure>
+<p><img src="c.png" alt="1"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -E hello.c//预处理</span><br></pre></td></tr></table></figure>
+<p><img src="E.png" alt="e"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//只编译不链接</span><br><span class="line">gcc -g -c hello.c</span><br><span class="line">//反汇编解析</span><br><span class="line">objdump --section=.text--disassemble=main--source hello.o &gt; out.txt</span><br></pre></td></tr></table></figure>
+<p><img src="o.png" alt="o"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//编译并链接</span><br><span class="line">gcc -g -static hello.c -o hello</span><br><span class="line">//反汇编解析</span><br><span class="line">objdump --disassemble --source hello &gt; out2.txt</span><br></pre></td></tr></table></figure>
+<p><img src="mips.png" alt="1"></p>
+</li>
+<li><p>mips交叉编译</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mips-linux-gnu-gcc -E hello.c//预处理</span><br></pre></td></tr></table></figure>
+<p><img src="1.png" alt="e"><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mips-linux-gnu-gcc -g -c hello.c//只编译不链接</span><br><span class="line">mips-linux-gnu-objdump -d -S hello.o &gt; out.txt//反汇编解析</span><br></pre></td></tr></table></figure><br><img src="2.png" alt="o"><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mips-linux-gnu-gcc -g -static hello.c -o hello//编译并链接</span><br><span class="line">mips-linux-gnu-objdump --d --S hello &gt; out2.txt//反汇编解析</span><br></pre></td></tr></table></figure><br><img src="3.png" alt="1"></p>
+<ol>
+<li>objdump参数含义</li>
+</ol>
+<ul>
+<li><code>--section=.text</code>表示仅处理.text节的内容</li>
+<li><code>--disassemble=main</code>表示仅反汇编main符号的代码</li>
+<li><code>--source</code>表示显示汇编代码与源代码的对应关系<br>简写：</li>
+<li><code>-D</code>反汇编所有的section</li>
+<li><code>-d</code>反汇编特定机器码的section</li>
+<li><code>-S</code>尽可能反汇编出源代码，尤其当编译的时候指定了<code>-g</code>这种调试参数时，效果比较明显,隐含了<code>-d</code>参数</li>
+<li><code>-s</code>显示指定section的完整内容。默认所有的非空section都会被显示。</li>
+</ul>
+<blockquote>
+<p>Thinking 1.2 思考下述问题：<br>• 尝试使用我们编写的readelf程序，解析之前在target目录下生成的内核ELF文件。<br>• 也许你会发现我们编写的readelf程序是不能解析readelf 文件本身的，而我们刚才介绍的系统工具readelf 则可以解析，这是为什么呢？（提示：尝试使用readelf-h，并阅读tools/readelf 目录下的 Makefile，观察 readelf 与 hello 的不同）</p>
+</blockquote>
+<p><img src="2-1.png" alt="1"><br><img src="2-2.png" alt="1"><br><img src="2-3.png" alt="1"><br><code>hello</code>是静态的<code>-static</code><br><img src="2-4.png" alt="1"><br>我们实现的 ELF 解析功能是简化版，只支持较基础的 ELF 文件格式；而编译出的 readelf 本身通常是动态链接、甚至是 PIE，可执行文件类型和段/节结构都比静态链接的 <code>hello</code> 更复杂。<br><code>hello</code> 使用 <code>-static</code> 后，不依赖动态链接器，ELF 中不会出现或较少出现 .dynamic、.interp、动态重定位等复杂内容，文件类型和布局是我们程序支持的情况，所以能够被解析。</p>
+<blockquote>
+<p>在理论课上我们了解到，MIPS体系结构上电时，启动入口地址为0xBFC00000（其实启动入口地址是根据具体型号而定的，由硬件逻辑确定，也有可能不是这个地址，但一定是一个确定的地址），但实验操作系统的内核入口并没有放在上电启动地址，而是按照内存布局图放置。思考为什么这样放置内核还能保证内核入口被正确跳转到？（提示：思考实验中启动过程的两阶段分别由谁执行。）</p>
+</blockquote>
+<ol>
+<li>需要启动的入口地址是<code>bootloader</code>的入口地址。<code>bootloader</code>将内核可执行文件拷贝到内存中，之后将控制权交给操作系统。</li>
+<li><p>我们的实验支持加载ELF格式内核，启动流程被简化为加载内核到内存，之后跳转到内核入口。</p>
+<ol>
+<li>Linker Script 通过 <code>lds</code> 文件控制各段(包括内核)以及各节加载到我们预期的位置。与此同时<code>kernel.lds</code>规定了 <code>ENTRY(_start)</code> ，即把内核入口定为<code>_start</code>这个函数。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  SECTIONS &#123;</span><br><span class="line">. = 0x80010000;</span><br><span class="line">.text : &#123; *(.text) &#125;</span><br><span class="line">.data : &#123; *(.data) &#125;</span><br><span class="line">.bss : &#123; *(.bss) &#125;</span><br><span class="line">bss_end = .;</span><br><span class="line">. = 0x80400000;</span><br><span class="line">end = . ;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>我们通过设置 <code>/init/start.S</code> 中 <code>_start</code> 函数，就可以正确的跳转至 <code>mips_init</code> 函数:<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">EXPORT(_start)</span><br><span class="line"><span class="meta">.set</span> <span class="built_in">at</span></span><br><span class="line"><span class="meta">.set</span> reorder</span><br><span class="line">    <span class="keyword">mtc0 </span>   <span class="built_in">zero</span>, CP0_STATUS</span><br><span class="line">    li	<span class="built_in">sp</span>, <span class="number">0x80400000</span></span><br><span class="line">    <span class="keyword">jal </span>mips_init</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="难点分析"><a href="#难点分析" class="headerlink" title="难点分析"></a>难点分析</h2><h2 id="ELF-文件部分"><a href="#ELF-文件部分" class="headerlink" title="ELF 文件部分"></a>ELF 文件部分</h2><p><strong>1. Section 与 Segment 的区分</strong></p>
+<p>ELF 文件同时包含节（section）和段（segment）两种结构。<br>节用于编译和链接阶段，如 .text、.data、.bss；段用于程序加载和运行。</p>
+<ul>
+<li>实验中解析 ELF 时使用节表</li>
+<li>内核加载到内存时依赖段表</li>
+</ul>
+<p>本质区别是：节描述“程序如何组织”，段描述“程序如何运行”。</p>
+<p>建立总模型：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ELF 文件</span><br><span class="line">├── ELF Header（文件头，Elf32_Ehdr）</span><br><span class="line">├── Section Header Table（节头表）</span><br><span class="line">│   ├── Section Header[0]（Elf32_Shdr）</span><br><span class="line">│   ├── Section Header[1]</span><br><span class="line">│   ├── ...</span><br><span class="line">│   └── Section Header[e_shnum - 1]</span><br><span class="line">└── 各个 Section 的实际数据</span><br><span class="line">    ├── .text</span><br><span class="line">    ├── .data</span><br><span class="line">    ├── .symtab</span><br><span class="line">    ├── .strtab</span><br><span class="line">    ├── .shstrtab</span><br><span class="line">    └── ...</span><br></pre></td></tr></table></figure>
+<h2 id="启动过程部分"><a href="#启动过程部分" class="headerlink" title="启动过程部分"></a>启动过程部分</h2><p><strong>1. 启动流程理解</strong></p>
+<p>实验中启动过程为：</p>
+<p>ELF 文件 → QEMU 加载到内存 → 跳转入口地址 → 执行内核</p>
+<ul>
+<li>内核不是自己加载自己，而是由 QEMU 完成加载</li>
+</ul>
+<p><strong>2. Linker Script 的作用</strong></p>
+<p>kernel.lds 决定内核在内存中的布局，如 .text、.data、.bss 的位置。 </p>
+<ul>
+<li>程序运行地址在链接阶段就已经确定，而不是运行时决定</li>
+</ul>
+<p><strong>3. _start 的作用</strong></p>
+<p>内核从 _start 开始执行，主要完成：</p>
+<ul>
+<li>清空 .bss</li>
+<li>初始化栈</li>
+<li><p>跳转到 mips_init</p>
+</li>
+<li><p>.bss 需要手动清零</p>
+</li>
+<li>栈必须提前设置，否则无法执行 C 代码</li>
+</ul>
+<p><strong>4. 内核地址放置问题</strong></p>
+<p>内核被放置在 kseg0 区域，是因为该区域可以直接访问物理内存。</p>
+<ul>
+<li>如果地址设置错误，内核将无法正常运行</li>
+</ul>
+<h2 id="printk-函数部分"><a href="#printk-函数部分" class="headerlink" title="printk 函数部分"></a>printk 函数部分</h2><p><strong>1. 不能使用 printf</strong></p>
+<p>printf 依赖 C 标准库，而内核尚未建立运行环境，因此需要自行实现 printk。</p>
+<p><strong>2. printk 的结构</strong></p>
+<p>printk 的实现分为三层：</p>
+<ul>
+<li>printk：接口函数</li>
+<li>vprintfmt：格式解析</li>
+<li><p>outputk：逐字符输出</p>
+</li>
+<li><p>输出过程涉及格式解析，而不仅仅是打印字符串</p>
+</li>
+</ul>
+<p><strong>3. 可变参数机制</strong></p>
+<p>printk 使用 va_list 处理不定参数。</p>
+<ul>
+<li>根据格式符（如 %d、%x）正确提取参数类型</li>
+</ul>
+<p><strong>4. vprintfmt 的实现</strong></p>
+<p>主要过程包括：</p>
+<ul>
+<li>扫描格式字符串</li>
+<li>解析格式说明符</li>
+<li>输出对应数据</li>
+<li>处理宽度、对齐、填充等格式细节</li>
+</ul>
+<h2 id="实验体会"><a href="#实验体会" class="headerlink" title="实验体会"></a>实验体会</h2><h3 id="lab1"><a href="#lab1" class="headerlink" title="lab1"></a>lab1</h3><p>刚开始看指导书看得坑坑巴巴的，读代码也一头雾水，根本不知道该如何下手，但是捋清楚整个内核启动过程之后，完成补全代码的任务就很快了。<br>另外课下是用跳板机做的，来回切换非常方便非常丝滑，希望课上不会被卡住。</p>
+<blockquote>
+<p>课上还是蛮简单的，给的信息非常充足，非常顺利地完成了exam和extra。</p>
+</blockquote>
+<h3 id="lab1-pre-exam"><a href="#lab1-pre-exam" class="headerlink" title="lab1-pre-exam"></a>lab1-pre-exam</h3><p>做起来还是非常简单的。其实就是将两个输出形式结合起来。在理解之后就非常快了。</p>
+<h2 id="原创说明"><a href="#原创说明" class="headerlink" title="原创说明"></a>原创说明</h2><p>参考了往届三位学长学姐的博客。感谢他们的精心整理和付出。<br><a target="_blank" rel="noopener" href="https://hyggge.github.io/2022/03/21/os/os-lab0-shi-yan-bao-gao/">https://hyggge.github.io/2022/03/21/os/os-lab0-shi-yan-bao-gao/</a><br><a target="_blank" rel="noopener" href="https://yanna-zy.github.io/2023/03/19/BUAA-OS-0/">https://yanna-zy.github.io/2023/03/19/BUAA-OS-0/</a><br><a target="_blank" rel="noopener" href="https://demiurge-zby.github.io/p/buaa-os-lab0-%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86/?t=1773901742315">https://demiurge-zby.github.io/p/buaa-os-lab0-%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86/?t=1773901742315</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://ranyechai.site">Caxirye</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://ranyechai.site/2026/04/01/OS-Lab1/">http://ranyechai.site/2026/04/01/OS-Lab1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://ranyechai.site" target="_blank">PlutoC</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OS/">OS</a><a class="post-meta__tags" href="/tags/lab/">lab</a></div><div class="post-share"><div class="social-share" data-image="/images/OSCover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/04/16/OS-Lab2/" title="OS-Lab2"><img class="cover" src="/images/OSCover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">OS-Lab2</div></div><div class="info-2"><div class="info-item-1">自映射我不喜欢你！</div></div></div></a><a class="pagination-related" href="/2026/03/28/OO-Unit1/" title="OO-Unit2"><img class="cover" src="/images/OOpreWork.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">OO-Unit2</div></div><div class="info-2"><div class="info-item-1">OOUnit1，表达式化简展开，代码量还是比较大的~</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/05/28/OS-Lab0/" title="OS-Lab0"><img class="cover" src="/images/OSCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-28</div><div class="info-item-2">OS-Lab0</div></div><div class="info-2"><div class="info-item-1">上机大失败，轻敌了！！！</div></div></div></a><a class="pagination-related" href="/2026/04/29/OS-Lab3/" title="OS-Lab3"><img class="cover" src="/images/OSCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-29</div><div class="info-item-2">OS-Lab3</div></div><div class="info-2"><div class="info-item-1">惊险完成</div></div></div></a><a class="pagination-related" href="/2026/05/21/OS-Lab4/" title="OS-Lab4"><img class="cover" src="/images/OSCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-21</div><div class="info-item-2">OS-Lab4</div></div><div class="info-2"><div class="info-item-1">量大管饱了属于是。。。</div></div></div></a><a class="pagination-related" href="/2026/04/16/OS-Lab2/" title="OS-Lab2"><img class="cover" src="/images/OSCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-16</div><div class="info-item-2">OS-Lab2</div></div><div class="info-2"><div class="info-item-1">自映射我不喜欢你！</div></div></div></a><a class="pagination-related" href="/2026/05/27/OS-Lab5/" title="OS-Lab5"><img class="cover" src="/images/OSCover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-27</div><div class="info-item-2">OS-Lab5</div></div><div class="info-2"><div class="info-item-1">奖励关！</div></div></div></a><a class="pagination-related" href="/2026/03/04/Linux-Basic-Usage/" title="Linux_Basic_Usage"><img class="cover" src="/images/OOpreWork.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-04</div><div class="info-item-2">Linux_Basic_Usage</div></div><div class="info-2"><div class="info-item-1">假期预习~你看看是假期吗</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/plutoc-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Caxirye</div><div class="author-info-description">just explore</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ranye-chai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Ranye-chai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab1"><span class="toc-number">1.</span> <span class="toc-text">Lab1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">思考题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%BE%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">难点分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ELF-%E6%96%87%E4%BB%B6%E9%83%A8%E5%88%86"><span class="toc-number">1.3.</span> <span class="toc-text">ELF 文件部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B%E9%83%A8%E5%88%86"><span class="toc-number">1.4.</span> <span class="toc-text">启动过程部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#printk-%E5%87%BD%E6%95%B0%E9%83%A8%E5%88%86"><span class="toc-number">1.5.</span> <span class="toc-text">printk 函数部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BD%93%E4%BC%9A"><span class="toc-number">1.6.</span> <span class="toc-text">实验体会</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lab1"><span class="toc-number">1.6.1.</span> <span class="toc-text">lab1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lab1-pre-exam"><span class="toc-number">1.6.2.</span> <span class="toc-text">lab1-pre-exam</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%9B%E8%AF%B4%E6%98%8E"><span class="toc-number">1.7.</span> <span class="toc-text">原创说明</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/05/28/OO-Unit3/" title="OO-Unit3"><img src="/images/OOpreWork.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OO-Unit3"/></a><div class="content"><a class="title" href="/2026/05/28/OO-Unit3/" title="OO-Unit3">OO-Unit3</a><time datetime="2026-05-28T09:33:35.000Z" title="发表于 2026-05-28 17:33:35">2026-05-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/05/28/OS-Lab0/" title="OS-Lab0"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab0"/></a><div class="content"><a class="title" href="/2026/05/28/OS-Lab0/" title="OS-Lab0">OS-Lab0</a><time datetime="2026-05-28T09:32:44.000Z" title="发表于 2026-05-28 17:32:44">2026-05-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/05/27/OS-Lab5/" title="OS-Lab5"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab5"/></a><div class="content"><a class="title" href="/2026/05/27/OS-Lab5/" title="OS-Lab5">OS-Lab5</a><time datetime="2026-05-27T13:33:12.000Z" title="发表于 2026-05-27 21:33:12">2026-05-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/05/21/OS-Lab4/" title="OS-Lab4"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab4"/></a><div class="content"><a class="title" href="/2026/05/21/OS-Lab4/" title="OS-Lab4">OS-Lab4</a><time datetime="2026-05-21T04:01:06.000Z" title="发表于 2026-05-21 12:01:06">2026-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/29/OS-Lab3/" title="OS-Lab3"><img src="/images/OSCover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS-Lab3"/></a><div class="content"><a class="title" href="/2026/04/29/OS-Lab3/" title="OS-Lab3">OS-Lab3</a><time datetime="2026-04-29T13:50:01.000Z" title="发表于 2026-04-29 21:50:01">2026-04-29</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/top.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 - 2026 By Caxirye</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
